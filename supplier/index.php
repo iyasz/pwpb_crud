@@ -5,17 +5,28 @@ include "../koneksi.php";
 $suppliers = $conn->query("SELECT * FROM supplier");
 
 if (isset($_POST['submit'])) {
-    $nama = htmlspecialchars($_POST['nama']);
+    $nama = htmlspecialchars($_POST['nama']) ;
     $kontak = htmlspecialchars($_POST['kontak']);
     $telp = htmlspecialchars($_POST['telp']);
     $alamat = htmlspecialchars($_POST['alamat']);
     $email = htmlspecialchars($_POST['email']);
 
-    if (empty($nama) or empty($kontak) or empty($telp) or empty($alamat) or empty($email)) {
-        $alert = "Masukan Data dengan lengkap";
-    } else {
-        mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
+    // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
+    $simpan = mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
+
+    if($simpan){
+        $alert = "Data Berhasil Disimpan";
+        echo '<script>alert("anime"); 
+                    location.replace("index.php"); </script>';
+        // header('location: index.php');
     }
+
+    // if (empty($nama) or empty($kontak) or empty($telp) or empty($alamat) or empty($email)) {
+    //     $alert = "Masukan Data dengan lengkap";
+    // } else {
+    //     $simpan;
+    //     echo '<script>location.replace("");</script>';
+    // }
 }
 
 ?>
@@ -36,6 +47,8 @@ if (isset($_POST['submit'])) {
 <style>
     .aa:focus {
         box-shadow: none;
+        opacity: 100%;
+        border-color: gray;
     }
 
     .aa {
@@ -43,6 +56,7 @@ if (isset($_POST['submit'])) {
         border-bottom: solid 1px gray;
         border-radius: 0;
         padding-left: 5px;
+        opacity: 70%;
     }
 
     .pp {
@@ -87,7 +101,7 @@ if (isset($_POST['submit'])) {
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card shadow-lg mb-3">
-                    <div class="card-header bg-dark">
+                    <div class="card-header bg-dark mb-3">
                         <h3 class="mb-0 text-white ps-5">Tambah Data Supplier</h3>
                     </div>
                     <div class="card-body">
@@ -96,27 +110,27 @@ if (isset($_POST['submit'])) {
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Nama <i class='bx bx-user'></i></label>
-                                        <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control aa">
+                                        <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="">Kontak <i class='bx bx-user-pin'></i></label>
-                                        <input type="text" autocomplete="off" name="kontak" id="kontak" placeholder="Nama Kontak" class="form-control aa">
+                                        <input type="text" autocomplete="off" name="kontak" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="">No. Telepon <i class='bx bx-phone'></i></label>
-                                        <input type="number" name="telp" autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control aa">
+                                        <input type="number" name="telp" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group ">
                                         <label for="">Alamat <i class='bx bx-home-alt-2'></i></label>
-                                        <input type="text" name="alamat" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control aa">
+                                        <input type="text" required name="alamat" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="">Email <i class='bx bx-envelope'></i></label>
-                                        <input type="text" name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
+                                        <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
                                     </div>
-                                    <p class="text-danger pp"><?php if (isset($alert)) {
+                                    <p class="text-primary pp"><?php if (isset($alert)) {
                                                                     echo $alert;
                                                                 } ?></p>
                                     <div class="form-group text-end mt-4">
@@ -128,8 +142,8 @@ if (isset($_POST['submit'])) {
                             </div>
                         </form>
                     </div>
-                    <div class="card-footer">
-                        <p class="text-center mb-0">&copy;Copyright Yasz Storage. All Right Reserved.</p>
+                    <div class="card-footer text-bg-dark ">
+                        <p class="text-center mb-0 ">&copy;Copyright Yasz Storage. All Right Reserved.</p>
                     </div>
                 </div>
             </div>
@@ -163,9 +177,12 @@ if (isset($_POST['submit'])) {
                                         <td><?= $supplier['telp'] ?></td>
                                         <td><?= $supplier['alamat'] ?></td>
                                         <td><?= $supplier['email'] ?></td>
-                                        <td class="text-center">
+                                        <td class="justify-content-center d-flex gap-1">
                                             <a href="" class="btn btn-primary btn-sm">Edit</a>
-                                            <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                            <form action="" method="post">
+                                                <input type="hidden" name="id" value="<?php $supplier['id'] ?>">
+                                                <button type="delete" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php } ?>
