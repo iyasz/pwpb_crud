@@ -29,6 +29,16 @@ if (isset($_POST['submit'])) {
     // }
 }
 
+if(isset($_POST['delete'])){
+    $id = htmlspecialchars($_POST['id']);
+    $delete = mysqli_query($conn, "DELETE FROM supplier where id = '$id'");
+
+    if($delete){
+        echo '<script>alert("Berhasil Hapus"); 
+                    location.replace("index.php"); </script>';
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -180,8 +190,8 @@ if (isset($_POST['submit'])) {
                                         <td class="justify-content-center d-flex gap-1">
                                             <a href="" class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
-                                                <input type="hidden" name="id" value="<?php $supplier['id'] ?>">
-                                                <button type="delete" class="btn btn-danger btn-sm">Delete</button>
+                                                <input type="hidden" name="id" value="<?= $supplier['id'] ?>">
+                                                <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
