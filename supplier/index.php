@@ -16,8 +16,7 @@ if (isset($_POST['submit'])) {
 
     if($simpan){
         $alert = "Data Berhasil Disimpan";
-        echo '<script>alert("anime"); 
-                    location.replace("index.php"); </script>';
+        echo '<script>location.replace("index.php"); </script>';
         // header('location: index.php');
     }
 
@@ -34,8 +33,7 @@ if(isset($_POST['delete'])){
     $delete = mysqli_query($conn, "DELETE FROM supplier where id = '$id'");
 
     if($delete){
-        echo '<script>alert("Berhasil Hapus"); 
-                    location.replace("index.php"); </script>';
+        echo 'location.replace("index.php"); </script>';
     }
 }
 
