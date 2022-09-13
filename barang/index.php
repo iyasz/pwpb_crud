@@ -33,6 +33,7 @@
         <a class="nav-link " aria-current="page" href="../">Home</a>
         <a class="nav-link active" href="">Barang</a>
         <a class="nav-link" href="../supplier">Supplier</a>
+        <a class="nav-link " href="../admin/">Admin</a>
       </div>
     </div>
   </div>

@@ -2,19 +2,19 @@
 
 include "../koneksi.php";
 
-$suppliers = $conn->query("SELECT * FROM supplier");
+$admin = $conn->query("SELECT * FROM admin");
 
 if (isset($_POST['submit'])) {
-    $nama = htmlspecialchars($_POST['nama']) ;
-    $kontak = htmlspecialchars($_POST['kontak']);
-    $telp = htmlspecialchars($_POST['telp']);
-    $alamat = htmlspecialchars($_POST['alamat']);
+    $nama = htmlspecialchars($_POST['nama']);
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
+    $telepon = htmlspecialchars($_POST['telepon']);
     $email = htmlspecialchars($_POST['email']);
 
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
-    $simpan = mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
+    $simpan = mysqli_query($conn, "INSERT INTO admin(nama,username,password,telepon,email) VALUES ('$nama','$username','$password','$telepon','$email') ");
 
-    if($simpan){
+    if ($simpan) {
         $alert = "Data Berhasil Disimpan";
         echo '<script>location.replace("index.php"); </script>';
         // header('location: index.php');
@@ -28,12 +28,12 @@ if (isset($_POST['submit'])) {
     // }
 }
 
-if(isset($_POST['delete'])){
+if (isset($_POST['delete'])) {
     $id = htmlspecialchars($_POST['id']);
-    $delete = mysqli_query($conn, "DELETE FROM supplier where id = '$id'");
+    
+    $delete = mysqli_query($conn, "DELETE FROM admin where id = '$id'");
 
     echo '<script>location.replace("index.php"); </script>';
-
 }
 
 ?>
@@ -95,44 +95,41 @@ if(isset($_POST['delete'])){
                 <div class="navbar-nav ps-2 p-1">
                     <a class="nav-link " aria-current="page" href="../">Home</a>
                     <a class="nav-link" href="../barang/">Barang</a>
-                    <a class="nav-link active" href="">Supplier</a>
-                    <a class="nav-link " href="../admin/">Admin</a>
+                    <a class="nav-link" href="../supplier/">Supplier</a>
+                    <a class="nav-link active" href="">Admin</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="mt-5">
-        <h1 class=" text-center mt-5 supp">Form Supplier</h1>
+        <h1 class=" text-center mt-5 supp">Form Admin</h1>
     </div>
     <div class="container mt-3 supp">
         <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card shadow-lg mb-3">
                     <div class="card-header bg-dark mb-3">
-                        <h3 class="mb-0 text-white ps-5">Tambah Data Supplier</h3>
+                        <h3 class="mb-0 text-white ps-5">Tambah Data Admin</h3>
                     </div>
                     <div class="card-body">
                         <form action="" method="post">
                             <div class="row">
-                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Nama <i class='bx bx-user'></i></label>
                                         <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="">Kontak <i class='bx bx-user-pin'></i></label>
-                                        <input type="text" autocomplete="off" name="kontak" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
+                                        <label for="">Username <i class='bx bx-user-pin'></i></label>
+                                        <input type="text" autocomplete="off" name="username" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
                                     </div>
                                     <div class="form-group mt-3">
-                                        <label for="">No. Telepon <i class='bx bx-phone'></i></label>
-                                        <input type="number" name="telp" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
+                                        <label for="">Password </label>
+                                        <input type="text" name="password" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
                                     </div>
-                                </div>
-                                <div class="col-md-6">
                                     <div class="form-group ">
-                                        <label for="">Alamat <i class='bx bx-home-alt-2'></i></label>
-                                        <input type="text" required name="alamat" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
+                                        <label for="">Telepon <i class='bx bx-phone'></i></label>
+                                        <input type="number" required name="telepon" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="">Email <i class='bx bx-envelope'></i></label>
@@ -146,7 +143,6 @@ if(isset($_POST['delete'])){
 
                                         <button class="btn btn-danger mt-4" type="reset" name="btn-reset">Reset</button>
                                     </div>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -168,8 +164,8 @@ if(isset($_POST['delete'])){
                                 <tr>
                                     <th>#</th>
                                     <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Kontak</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
                                     <th>No .Telp</th>
                                     <th>Email</th>
                                     <th class="text-center">Aksi</th>
@@ -177,18 +173,18 @@ if(isset($_POST['delete'])){
                             </thead>
                             <tbody>
                                 <?php $no = 1;
-                                foreach ($suppliers as $supplier) { ?>
+                                foreach ($admin as $admins) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $supplier['nama'] ?></td>
-                                        <td><?= $supplier['kontak'] ?></td>
-                                        <td><?= $supplier['telp'] ?></td>
-                                        <td><?= $supplier['alamat'] ?></td>
-                                        <td><?= $supplier['email'] ?></td>
+                                        <td><?= $admins['nama'] ?></td>
+                                        <td><?= $admins['username'] ?></td>
+                                        <td><?= $admins['password'] ?></td>
+                                        <td><?= $admins['telepon'] ?></td>
+                                        <td><?= $admins['email'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
                                             <a href="../edit/edit.php?id= <?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
-                                                <input type="hidden" name="id" value="<?= $supplier['id'] ?>">
+                                                <input type="hidden" name="id" value="<?= $admins['id'] ?>">
                                                 <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </td>
