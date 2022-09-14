@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 
 if (isset($_POST['delete'])) {
     $id = htmlspecialchars($_POST['id']);
-    
+
     $delete = mysqli_query($conn, "DELETE FROM admin where id = '$id'");
 
     echo '<script>location.replace("index.php"); </script>';
@@ -49,6 +49,7 @@ if (isset($_POST['delete'])) {
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <title>Supplier - Yasz Storage Supplier</title>
 </head>
 <style>
@@ -85,7 +86,7 @@ if (isset($_POST['delete'])) {
 </style>
 
 <body>
-    <div class="na navbar navbar-expand-lg bg-dark bg-gradient navbar-dark">
+    <div class="na navbar navbar-expand-lg bg-dark bg-gradient navbar-dark animate__animated animate__fadeInDown">
         <div class="container-fluid ">
             <a class="navbar-brand h3 mb-0 text-white ps-5" href="../index.php">Yasz Storage</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,46 +104,46 @@ if (isset($_POST['delete'])) {
     </div>
 
     <div class="mt-5">
-        <h1 class=" text-center mt-5 supp">Form Admin</h1>
+        <h1 class=" text-center mt-5 supp animate__animated animate__fadeInRight">Form Admin</h1>
     </div>
     <div class="container mt-3 supp">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card shadow-lg mb-3">
-                    <div class="card-header bg-dark mb-3">
-                        <h3 class="mb-0 text-white ps-5">Tambah Data Admin</h3>
+                <div class="card shadow-lg mb-3 animate__animated animate__fadeInRight">
+                    <div class="card-header bg-dark mb-3 ">
+                        <h3 class="mb-0 text-white ps-5 animate__animated animate__fadeInRight">Tambah Data Admin</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body ">
                         <form action="" method="post">
                             <div class="row">
-                                    <div class="form-group">
-                                        <label for="">Nama <i class='bx bx-user'></i></label>
-                                        <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label for="">Username <i class='bx bx-user-pin'></i></label>
-                                        <input type="text" autocomplete="off" name="username" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label for="">Password </label>
-                                        <input type="text" name="password" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="">Telepon <i class='bx bx-phone'></i></label>
-                                        <input type="number" required name="telepon" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label for="">Email <i class='bx bx-envelope'></i></label>
-                                        <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
-                                    </div>
-                                    <p class="text-primary pp"><?php if (isset($alert)) {
-                                                                    echo $alert;
-                                                                } ?></p>
-                                    <div class="form-group text-end mt-4">
-                                        <button class="btn btn-primary mt-4 btn-st" type="submit" name="submit">Submit</button>
+                                <div class="form-group">
+                                    <label for="">Nama <i class='bx bx-user'></i></label>
+                                    <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="">Username <i class='bx bx-user-pin'></i></label>
+                                    <input type="text" autocomplete="off" name="username" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="">Password </label>
+                                    <input type="text" name="password" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="">Telepon <i class='bx bx-phone'></i></label>
+                                    <input type="number" required name="telepon" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="">Email <i class='bx bx-envelope'></i></label>
+                                    <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
+                                </div>
+                                <p class="text-primary pp"><?php if (isset($alert)) {
+                                                                echo $alert;
+                                                            } ?></p>
+                                <div class="form-group text-end mt-4">
+                                    <button class="btn btn-primary mt-4 btn-st" type="submit" name="submit">Submit</button>
 
-                                        <button class="btn btn-danger mt-4" type="reset" name="btn-reset">Reset</button>
-                                    </div>
+                                    <button class="btn btn-danger mt-4" type="reset" name="btn-reset">Reset</button>
+                                </div>
                             </div>
                         </form>
                     </div>

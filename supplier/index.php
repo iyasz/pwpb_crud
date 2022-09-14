@@ -5,7 +5,7 @@ include "../koneksi.php";
 $suppliers = $conn->query("SELECT * FROM supplier");
 
 if (isset($_POST['submit'])) {
-    $nama = htmlspecialchars($_POST['nama']) ;
+    $nama = htmlspecialchars($_POST['nama']);
     $kontak = htmlspecialchars($_POST['kontak']);
     $telp = htmlspecialchars($_POST['telp']);
     $alamat = htmlspecialchars($_POST['alamat']);
@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
     $simpan = mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
 
-    if($simpan){
+    if ($simpan) {
         $alert = "Data Berhasil Disimpan";
         echo '<script>location.replace("index.php"); </script>';
         // header('location: index.php');
@@ -28,12 +28,16 @@ if (isset($_POST['submit'])) {
     // }
 }
 
-if(isset($_POST['delete'])){
+if (isset($_POST['delete'])) {
     $id = htmlspecialchars($_POST['id']);
     $delete = mysqli_query($conn, "DELETE FROM supplier where id = '$id'");
 
-    echo '<script>location.replace("index.php"); </script>';
-
+    $swal = 1;
+    echo '<script>
+                setInterval(function () {
+                    window.location.href="index.php"
+                }, 1000);
+            </script>';
 }
 
 ?>
@@ -49,6 +53,7 @@ if(isset($_POST['delete'])){
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Supplier - Yasz Storage Supplier</title>
 </head>
 <style>
@@ -186,7 +191,7 @@ if(isset($_POST['delete'])){
                                         <td><?= $supplier['alamat'] ?></td>
                                         <td><?= $supplier['email'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
-                                            <a href="../edit/edit.php?id= <?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="../edit/edit.php?id=<?= $supplier['id'] ?>" class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
                                                 <input type="hidden" name="id" value="<?= $supplier['id'] ?>">
                                                 <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
@@ -202,6 +207,20 @@ if(isset($_POST['delete'])){
         </div>
     </div>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <?php
+    if (isset($swal)) {
+        echo "<script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Data Berhasil Di Hapus',
+            showConfirmButton: false,
+            timer: 1000
+          })
+            </script>";
+    }
+    ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </body>
 
 </html>
