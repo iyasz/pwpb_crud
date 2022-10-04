@@ -185,7 +185,7 @@ if (isset($_POST['delete'])) {
                                         <td><?= $supplier['alamat'] ?></td>
                                         <td><?= $supplier['email'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
-                                            <a href="../edit/edit.php?id= <?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="../edit/edit.php?id=<?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
                                                 <input type="hidden" name="id" value="<?= $supplier['id'] ?>">
                                                 <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
