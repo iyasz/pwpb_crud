@@ -7,15 +7,14 @@ if (isset($_POST['btn-sbt'])) {
 
   if (empty($username) or empty($password)) {
     $alert = "Masukan Username Dan Password";
-  } else{
+  } else {
     $userCheck = mysqli_query($conn, "select * from tbl_user where username = '$username'");
     $passCheck = mysqli_query($conn, "select * from tbl_user where password = '$password'");
-    
-    if(mysqli_num_rows($userCheck) <= 0){
+
+    if (mysqli_num_rows($userCheck) <= 0) {
       $alert = "Username Anda salah";
-    }
-    else {
-      if(mysqli_num_rows($passCheck) <= 0){
+    } else {
+      if (mysqli_num_rows($passCheck) <= 0) {
         $alert = "Password anda salah";
       } else {
         header('location: ../index.php');
@@ -43,11 +42,11 @@ if (isset($_POST['btn-sbt'])) {
 <body>
   <style>
     .na {
-        position: fixed;
-        top: 0;
-        right: 0;
-        z-index: 3;
-        left: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 3;
+      left: 0;
     }
   </style>
   <div class="na navbar navbar-expand-lg bg-dark bg-gradient navbar-dark">
@@ -61,6 +60,7 @@ if (isset($_POST['btn-sbt'])) {
           <a class="nav-link active" aria-current="page" href="">Home</a>
           <a class="nav-link" href="barang/">Barang</a>
           <a class="nav-link" href="supplier/">Supplier</a>
+          <a class="nav-link" href="transaksi/">Transaksi</a>
         </div>
       </div>
     </div>
