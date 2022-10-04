@@ -97,7 +97,7 @@ if (isset($_POST['delete'])) {
                     <a class="nav-link " aria-current="page" href="../">Home</a>
                     <a class="nav-link" href="../barang/">Barang</a>
                     <a class="nav-link" href="../supplier/">Supplier</a>
-                    <a class="nav-link " href="">Transaksi</a>
+                    <a class="nav-link " href="../transaksi/">Transaksi</a>
                     <a class="nav-link active" href="">Admin</a>
 
                 </div>
@@ -185,7 +185,7 @@ if (isset($_POST['delete'])) {
                                         <td><?= $admins['telepon'] ?></td>
                                         <td><?= $admins['email'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
-                                            <a href="../edit/edit.php?id= <?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="../edit/edit_admin.php?id=<?= $admins['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
                                                 <input type="hidden" name="id" value="<?= $admins['id'] ?>">
                                                 <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
