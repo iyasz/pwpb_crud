@@ -35,7 +35,7 @@ include "../koneksi.php";
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ps-2 p-1">
+                <div class="navbar-nav mx-auto p-1">
                     <a class="nav-link " aria-current="page" href="../">Home</a>
                     <a class="nav-link" href="../barang/">Barang</a>
                     <a class="nav-link" href="../supplier/">Supplier</a>

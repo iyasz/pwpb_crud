@@ -56,7 +56,7 @@ if (isset($_POST['btn-sbt'])) {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ps-2 p-1">
+        <div class="navbar-nav p-1 mx-auto">
           <a class="nav-link active" aria-current="page" href="">Home</a>
           <a class="nav-link" href="barang/">Barang</a>
           <a class="nav-link" href="supplier/">Supplier</a>
