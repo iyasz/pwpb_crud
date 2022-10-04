@@ -40,6 +40,7 @@ include "../koneksi.php";
                     <a class="nav-link" href="../barang/">Barang</a>
                     <a class="nav-link" href="../supplier/">Supplier</a>
                     <a class="nav-link active" href="">Transaksi</a>
+                    <a class="nav-link " href="../admin/">Admin</a>
                 </div>
             </div>
         </div>

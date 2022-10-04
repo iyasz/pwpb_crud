@@ -97,7 +97,9 @@ if (isset($_POST['delete'])) {
                     <a class="nav-link " aria-current="page" href="../">Home</a>
                     <a class="nav-link" href="../barang/">Barang</a>
                     <a class="nav-link" href="../supplier/">Supplier</a>
+                    <a class="nav-link " href="">Transaksi</a>
                     <a class="nav-link active" href="">Admin</a>
+
                 </div>
             </div>
         </div>
@@ -153,7 +155,7 @@ if (isset($_POST['delete'])) {
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center mt-5">
+        <div class="row justify-content-center mt-5 mb-5">
             <div class="col-lg-12">
                 <div class="card shadow-lg">
                     <div class="card-header text-bg-dark">

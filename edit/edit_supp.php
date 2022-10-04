@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     $alamat = htmlspecialchars($_POST['alamat']);
     $email = htmlspecialchars($_POST['email']);
 
-    $update = $conn->query("UPDATE supplier SET nama = '$nama', kontak = '$kontak', telp = '$telp', alamat = '$alamat', email = '$email'");
+    $update = $conn->query("UPDATE supplier SET nama = '$nama', kontak = '$kontak', telp = '$telp', alamat = '$alamat', email = '$email' WHERE id = '$id'");
     if ($update == TRUE) {
         echo '<script>alert("Data Berhasil Di Ubah");
         location.replace("../supplier/index.php"); </script>';
@@ -83,11 +83,10 @@ if (isset($_POST['submit'])) {
                     <a class="nav-link " aria-current="page" href="../">Home</a>
                     <a class="nav-link" href="../barang/">Barang</a>
                     <a class="nav-link active" href="">Supplier</a>
-<<<<<<< HEAD:edit/edit_supp.php
-                    <a class="nav-link " href="../transaksi/">Transaksi</a>
-=======
-                    <a class="nav-link " href="../admin/">Admin</a>
->>>>>>> e29c5d8f014e149583973a21627be6971be410aa:edit/edit.php
+                    <<<<<<< HEAD:edit/edit_supp.php <a class="nav-link " href="../transaksi/">Transaksi</a>
+                        =======
+                        <a class="nav-link " href="../admin/">Admin</a>
+                        >>>>>>> e29c5d8f014e149583973a21627be6971be410aa:edit/edit.php
                 </div>
             </div>
         </div>
