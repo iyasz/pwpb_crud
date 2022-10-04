@@ -5,7 +5,7 @@ include "../koneksi.php";
 $suppliers = $conn->query("SELECT * FROM supplier");
 
 if (isset($_POST['submit'])) {
-    $nama = htmlspecialchars($_POST['nama']) ;
+    $nama = htmlspecialchars($_POST['nama']);
     $kontak = htmlspecialchars($_POST['kontak']);
     $telp = htmlspecialchars($_POST['telp']);
     $alamat = htmlspecialchars($_POST['alamat']);
@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
     $simpan = mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
 
-    if($simpan){
+    if ($simpan == TRUE) {
         $alert = "Data Berhasil Disimpan";
         echo '<script>location.replace("index.php"); </script>';
         // header('location: index.php');
@@ -28,12 +28,11 @@ if (isset($_POST['submit'])) {
     // }
 }
 
-if(isset($_POST['delete'])){
+if (isset($_POST['delete'])) {
     $id = htmlspecialchars($_POST['id']);
     $delete = mysqli_query($conn, "DELETE FROM supplier where id = '$id'");
 
     echo '<script>location.replace("index.php"); </script>';
-
 }
 
 ?>
@@ -167,9 +166,9 @@ if(isset($_POST['delete'])){
                                 <tr>
                                     <th>#</th>
                                     <th>Nama</th>
-                                    <th>Alamat</th>
                                     <th>Kontak</th>
                                     <th>No .Telp</th>
+                                    <th>Alamat</th>
                                     <th>Email</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
