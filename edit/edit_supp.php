@@ -1,3 +1,30 @@
+<?php
+
+include "../koneksi.php";
+
+$id = $_GET['id'];
+
+$data = $conn->query("SELECT * FROM supplier WHERE id = '$id'");
+
+$datas = mysqli_fetch_assoc($data);
+
+if (isset($_POST['submit'])) {
+    $nama = htmlspecialchars($_POST['nama']);
+    $kontak = htmlspecialchars($_POST['kontak']);
+    $telp = htmlspecialchars($_POST['telp']);
+    $alamat = htmlspecialchars($_POST['alamat']);
+    $email = htmlspecialchars($_POST['email']);
+
+    $update = $conn->query("UPDATE supplier SET nama = '$nama', kontak = '$kontak', telp = '$telp', alamat = '$alamat', email = '$email'");
+    if ($update == TRUE) {
+        echo '<script>alert("Data Berhasil Di Ubah");
+        location.replace("../supplier/index.php"); </script>';
+    }
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,8 +89,6 @@
         </div>
     </div>
 
-    <div class="position-fixed top-50 start-50"></div>
-
     <div class="mt-5">
         <h1 class=" text-center mt-5 supp">Form Supplier</h1>
     </div>
@@ -72,7 +97,7 @@
             <div class="col-md-12">
                 <div class="card shadow-lg mb-3">
                     <div class="card-header bg-dark mb-3">
-                        <h3 class="mb-0 text-white ps-5">Tambah Data Supplier</h3>
+                        <h3 class="mb-0 text-white ps-5">Update Data Supplier</h3>
                     </div>
                     <div class="card-body">
                         <form action="" method="post">
@@ -80,25 +105,25 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Nama <i class='bx bx-user'></i></label>
-                                        <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
+                                        <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" value="<?= $datas['nama'] ?>" required>
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="">Kontak <i class='bx bx-user-pin'></i></label>
-                                        <input type="text" autocomplete="off" name="kontak" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
+                                        <input type="text" value="<?= $datas['kontak'] ?>" autocomplete=" off" name="kontak" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="">No. Telepon <i class='bx bx-phone'></i></label>
-                                        <input type="number" name="telp" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
+                                        <input type="number" value="<?= $datas['telp'] ?>" name=" telp" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group ">
                                         <label for="">Alamat <i class='bx bx-home-alt-2'></i></label>
-                                        <input type="text" required name="alamat" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
+                                        <input type="text" required name="alamat" id="kontak" placeholder="Masukan Alamat" autocomplete="off" value="<?= $datas['alamat'] ?>" class=" form-control mb-3 aa">
                                     </div>
                                     <div class="form-group mt-3">
                                         <label for="">Email <i class='bx bx-envelope'></i></label>
-                                        <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
+                                        <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" value="<?= $datas['email'] ?>" class=" form-control aa">
                                     </div>
                                     <p class="text-primary pp"><?php if (isset($alert)) {
                                                                     echo $alert;
@@ -118,3 +143,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+<!-- phpbackgroud -->
