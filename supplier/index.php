@@ -14,7 +14,11 @@ if (isset($_POST['submit'])) {
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
     $simpan = mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
 
+<<<<<<< HEAD
     if ($simpan == TRUE) {
+=======
+    if ($simpan) {
+>>>>>>> e29c5d8f014e149583973a21627be6971be410aa
         $alert = "Data Berhasil Disimpan";
         echo '<script>location.replace("index.php"); </script>';
         // header('location: index.php');
@@ -32,7 +36,16 @@ if (isset($_POST['delete'])) {
     $id = htmlspecialchars($_POST['id']);
     $delete = mysqli_query($conn, "DELETE FROM supplier where id = '$id'");
 
+<<<<<<< HEAD
     echo '<script>location.replace("index.php"); </script>';
+=======
+    $swal = 1;
+    echo '<script>
+                setInterval(function () {
+                    window.location.href="index.php"
+                }, 1000);
+            </script>';
+>>>>>>> e29c5d8f014e149583973a21627be6971be410aa
 }
 
 ?>
@@ -48,6 +61,7 @@ if (isset($_POST['delete'])) {
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Supplier - Yasz Storage Supplier</title>
 </head>
 <style>
@@ -95,7 +109,11 @@ if (isset($_POST['delete'])) {
                     <a class="nav-link " aria-current="page" href="../">Home</a>
                     <a class="nav-link" href="../barang/">Barang</a>
                     <a class="nav-link active" href="">Supplier</a>
+<<<<<<< HEAD
                     <a class="nav-link " href="../transaksi/">Transaksi</a>
+=======
+                    <a class="nav-link " href="../admin/">Admin</a>
+>>>>>>> e29c5d8f014e149583973a21627be6971be410aa
                 </div>
             </div>
         </div>
@@ -185,7 +203,11 @@ if (isset($_POST['delete'])) {
                                         <td><?= $supplier['alamat'] ?></td>
                                         <td><?= $supplier['email'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
+<<<<<<< HEAD
                                             <a href="../edit/edit_supp.php?id=<?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
+=======
+                                            <a href="../edit/edit.php?id=<?= $supplier['id'] ?>" class="btn btn-primary btn-sm">Edit</a>
+>>>>>>> e29c5d8f014e149583973a21627be6971be410aa
                                             <form action="" method="post">
                                                 <input type="hidden" name="id" value="<?= $supplier['id'] ?>">
                                                 <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
@@ -201,6 +223,20 @@ if (isset($_POST['delete'])) {
         </div>
     </div>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <?php
+    if (isset($swal)) {
+        echo "<script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Data Berhasil Di Hapus',
+            showConfirmButton: false,
+            timer: 1000
+          })
+            </script>";
+    }
+    ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </body>
 
 </html>

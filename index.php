@@ -60,7 +60,11 @@ if (isset($_POST['btn-sbt'])) {
           <a class="nav-link active" aria-current="page" href="">Home</a>
           <a class="nav-link" href="barang/">Barang</a>
           <a class="nav-link" href="supplier/">Supplier</a>
+<<<<<<< HEAD
           <a class="nav-link" href="transaksi/">Transaksi</a>
+=======
+          <a class="nav-link" href="admin/">Admin</a>
+>>>>>>> e29c5d8f014e149583973a21627be6971be410aa
         </div>
       </div>
     </div>
