@@ -95,6 +95,7 @@ if (isset($_POST['delete'])) {
                     <a class="nav-link " aria-current="page" href="../">Home</a>
                     <a class="nav-link" href="../barang/">Barang</a>
                     <a class="nav-link active" href="">Supplier</a>
+                    <a class="nav-link " href="../transaksi/">Transaksi</a>
                 </div>
             </div>
         </div>
