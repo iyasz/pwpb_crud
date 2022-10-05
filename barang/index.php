@@ -117,6 +117,10 @@ if (isset($_POST['delete'])) {
             <form action="" method="post">
               <div class="row">
                 <div class="form-group">
+                  <label for="">Kode <i class='bx bx-user'></i></label>
+                  <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
+                </div>
+                <div class="form-group">
                   <label for="">Nama <i class='bx bx-user'></i></label>
                   <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
                 </div>

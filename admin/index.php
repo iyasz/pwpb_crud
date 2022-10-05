@@ -50,7 +50,7 @@ if (isset($_POST['delete'])) {
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <title>Supplier - Yasz Storage Supplier</title>
+    <title>Admin - Yasz Storage Supplier</title>
 </head>
 <style>
     .aa:focus {
