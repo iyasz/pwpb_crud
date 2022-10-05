@@ -1,29 +1,6 @@
 <?php
 include "koneksi.php";
 
-if (isset($_POST['btn-sbt'])) {
-  $username = htmlspecialchars($_POST['username']);
-  $password = htmlspecialchars($_POST['password']);
-
-  if (empty($username) or empty($password)) {
-    $alert = "Masukan Username Dan Password";
-  } else {
-    $userCheck = mysqli_query($conn, "select * from tbl_user where username = '$username'");
-    $passCheck = mysqli_query($conn, "select * from tbl_user where password = '$password'");
-
-    if (mysqli_num_rows($userCheck) <= 0) {
-      $alert = "Username Anda salah";
-    } else {
-      if (mysqli_num_rows($passCheck) <= 0) {
-        $alert = "Password anda salah";
-      } else {
-        header('location: ../index.php');
-        $alert = "Silahkan Masuk";
-      }
-    }
-  }
-}
-
 
 ?>
 
@@ -36,6 +13,7 @@ if (isset($_POST['btn-sbt'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app/style.css">
   <title>Home - Yasz Storage Home</title>
 </head>
 
@@ -49,6 +27,7 @@ if (isset($_POST['btn-sbt'])) {
       left: 0;
     }
   </style>
+  <!-- header -->
   <div class="na navbar navbar-expand-lg bg-dark bg-gradient navbar-dark">
     <div class="container-fluid ">
       <a class="navbar-brand h3 mb-0 text-white ps-5" href="">Yasz Storage</a>
@@ -57,11 +36,25 @@ if (isset($_POST['btn-sbt'])) {
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav p-1 mx-auto">
-          <a class="nav-link active" aria-current="page" href="">Home</a>
+          <a class="nav-link active" href="">Home</a>
           <a class="nav-link" href="barang/">Barang</a>
           <a class="nav-link" href="supplier/">Supplier</a>
           <a class="nav-link" href="transaksi/">Transaksi</a>
           <a class="nav-link" href="admin/">Admin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end header  -->
+
+  <!-- content  -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
         </div>
       </div>
     </div>
