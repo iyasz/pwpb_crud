@@ -2,23 +2,26 @@
 
 include "../koneksi.php";
 
-$suppliers = $conn->query("SELECT * FROM supplier");
+$suppliers = $conn->query("SELECT * FROM barang");
 
 if (isset($_POST['submit'])) {
+  $kode = htmlspecialchars($_POST['kode']);
   $nama = htmlspecialchars($_POST['nama']);
-  $kontak = htmlspecialchars($_POST['kontak']);
-  $telp = htmlspecialchars($_POST['telp']);
-  $alamat = htmlspecialchars($_POST['alamat']);
-  $email = htmlspecialchars($_POST['email']);
+  $stok = htmlspecialchars($_POST['stok']);
+  $harga = number_format($_POST['harga']);
+  $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
+  $jenis = htmlspecialchars($_POST['jenis']);
 
   // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
-  $simpan = mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
-
-  if ($simpan == TRUE) {
+  if ($jenis == "") {
+    echo "<script>alert('Masukan Jenis Barang')</script>";
+    echo '<script>location.replace("index.php"); </script>';
+  } else {
+    $simpan = $conn->query("INSERT INTO barang (kode, nama,stok,harga,kadaluwarsa,jenis_barang) VALUES ('$kode','$nama','$stok','$harga','$kadaluwarsa','$jenis')");
     $alert = "Data Berhasil Disimpan";
     echo '<script>location.replace("index.php"); </script>';
-    // header('location: index.php');
   }
+  // header('location: index.php');
 
   // if (empty($nama) or empty($kontak) or empty($telp) or empty($alamat) or empty($email)) {
   //     $alert = "Masukan Data dengan lengkap";
@@ -30,7 +33,7 @@ if (isset($_POST['submit'])) {
 
 if (isset($_POST['delete'])) {
   $id = htmlspecialchars($_POST['id']);
-  $delete = mysqli_query($conn, "DELETE FROM supplier where id = '$id'");
+  $delete = mysqli_query($conn, "DELETE FROM barang where id = '$id'");
 
   echo '<script>location.replace("index.php"); </script>';
 }
@@ -138,7 +141,7 @@ if (isset($_POST['delete'])) {
                 </div>
                 <div class="form-group mt-3">
                   <label for="">Jenis Barang <i class='bx bx-envelope'></i></label>
-                  <select class="form-select aa" aria-label="Default select example">
+                  <select name="jenis" class="form-select aa" aria-label="Default select example">
                     <option selected></option>
                     <option value="makanan">Makanan</option>
                     <option value="minum">Minum</option>
@@ -172,11 +175,12 @@ if (isset($_POST['delete'])) {
               <thead>
                 <tr>
                   <th>#</th>
+                  <th>Kode Barang</th>
                   <th>Nama</th>
-                  <th>Kontak</th>
-                  <th>No .Telp</th>
-                  <th>Alamat</th>
-                  <th>Email</th>
+                  <th>Stok</th>
+                  <th>Harga</th>
+                  <th>Kadaluwarsa</th>
+                  <th>Jenis</th>
                   <th class="text-center">Aksi</th>
                 </tr>
               </thead>
@@ -185,15 +189,16 @@ if (isset($_POST['delete'])) {
                 foreach ($suppliers as $supplier) { ?>
                   <tr>
                     <td><?= $no++ ?></td>
+                    <td><?= $supplier['kode'] ?></td>
                     <td><?= $supplier['nama'] ?></td>
-                    <td><?= $supplier['kontak'] ?></td>
-                    <td><?= $supplier['telp'] ?></td>
-                    <td><?= $supplier['alamat'] ?></td>
-                    <td><?= $supplier['email'] ?></td>
+                    <td><?= $supplier['stok'] ?></td>
+                    <td><?= $supplier['harga'] ?></td>
+                    <td><?= $supplier['kadaluwarsa'] ?></td>
+                    <td><?= $supplier['jenis_barang'] ?></td>
                     <td class="justify-content-center d-flex gap-1">
-                      <a href="../edit/edit.php?id= <?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
+                      <a href="../edit/edit.php?id= <?= $supplier['kode'] ?> " class="btn btn-primary btn-sm">Edit</a>
                       <form action="" method="post">
-                        <input type="hidden" name="id" value="<?= $supplier['id'] ?>">
+                        <input type="hidden" name="id" value="<?= $supplier['kode'] ?>">
                         <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
                       </form>
                     </td>
