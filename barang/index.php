@@ -32,8 +32,8 @@ if (isset($_POST['submit'])) {
 }
 
 if (isset($_POST['delete'])) {
-  $id = htmlspecialchars($_POST['id']);
-  $delete = mysqli_query($conn, "DELETE FROM barang where id = '$id'");
+  $kode = htmlspecialchars($_POST['kode']);
+  $delete = mysqli_query($conn, "DELETE FROM barang where kode = '$kode'");
 
   echo '<script>location.replace("index.php"); </script>';
 }
@@ -198,7 +198,7 @@ if (isset($_POST['delete'])) {
                     <td class="justify-content-center d-flex gap-1">
                       <a href="../edit/edit.php?id= <?= $supplier['kode'] ?> " class="btn btn-primary btn-sm">Edit</a>
                       <form action="" method="post">
-                        <input type="hidden" name="id" value="<?= $supplier['kode'] ?>">
+                        <input type="hidden" name="kode" value="<?= $supplier['kode'] ?>">
                         <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
                       </form>
                     </td>
