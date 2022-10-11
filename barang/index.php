@@ -126,7 +126,7 @@ if (isset($_POST['delete'])) {
                 </div>
                 <div class="form-group mt-3">
                   <label for="">Stok <i class='bx bx-user-pin'></i></label>
-                  <input type="text" autocomplete="off" name="stok" placeholder="Stok Barang" required class="form-control mb-3 aa">
+                  <input type="number" autocomplete="off" name="stok" placeholder="Stok Barang" required class="form-control mb-3 aa">
                 </div>
                 <div class="form-group mt-3">
                   <label for="">Harga <i class='bx bx-phone'></i></label>
@@ -138,7 +138,11 @@ if (isset($_POST['delete'])) {
                 </div>
                 <div class="form-group mt-3">
                   <label for="">Jenis Barang <i class='bx bx-envelope'></i></label>
-                  <input type="text" required name="jenis" placeholder="Jenis Barang" autocomplete="off" class="form-control mb-3 aa">
+                  <select class="form-select aa" aria-label="Default select example">
+                    <option selected></option>
+                    <option value="makanan">Makanan</option>
+                    <option value="minum">Minum</option>
+                  </select>
                 </div>
                 <p class="text-primary pp"><?php if (isset($alert)) {
                                               echo $alert;
