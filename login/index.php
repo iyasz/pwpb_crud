@@ -1,14 +1,13 @@
 <?php
 
-include "../koneksi.php";
 if (isset($_POST['btn-masuk'])) {
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['password']);
     if ($username == "" or $password == "") {
         $alert = "Masukkan Username dan Password Anda";
     } else {
-        $checkUser = mysqli_query($conn, "SELECT * FROM tbl_adm where username = '$username'");
-        $checkPass = mysqli_query($conn, "SELECT * FROM tbl_adm where password = '$password'");
+        $checkUser = mysqli_query($conn, "SELECT * FROM admin where username = '$username'");
+        $checkPass = mysqli_query($conn, "SELECT * FROM admin where password = '$password'");
         if (mysqli_num_rows($checkUser) <= 0) {
             $alert = "Username Anda Belum Terdaftar";
         } else {
@@ -33,6 +32,7 @@ if (isset($_POST['btn-masuk'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/img/logo/favicon.png">
     <title>Login - YaszStorage</title>
+    <link rel="stylesheet" href="../app/style.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
 

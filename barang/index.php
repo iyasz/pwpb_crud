@@ -3,6 +3,7 @@
 include "../koneksi.php";
 
 $suppliers = $conn->query("SELECT * FROM barang");
+$sups = $conn->query("SELECT * FROM supplier");
 
 if (isset($_POST['submit'])) {
   $kode = htmlspecialchars($_POST['kode']);
@@ -11,13 +12,14 @@ if (isset($_POST['submit'])) {
   $harga = htmlspecialchars($_POST['harga']);
   $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
   $jenis = htmlspecialchars($_POST['jenis']);
+  $supp = htmlspecialchars($_POST['suppl']);
 
   // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
   if ($jenis == "") {
     echo "<script>alert('Masukan Jenis Barang')</script>";
     echo '<script>location.replace("index.php"); </script>';
   } else {
-    $simpan = $conn->query("INSERT INTO barang (kode, nama,stok,harga,kadaluwarsa,jenis_barang) VALUES ('$kode','$nama','$stok','$harga','$kadaluwarsa','$jenis')");
+    $simpan = $conn->query("INSERT INTO barang (kode, nama,stok,harga,kadaluwarsa,jenis_barang,supplier_id) VALUES ('$kode','$nama','$stok','$harga','$kadaluwarsa','$jenis','$supp')");
     $alert = "Data Berhasil Disimpan";
     echo '<script>location.replace("index.php"); </script>';
   }
@@ -51,7 +53,8 @@ if (isset($_POST['delete'])) {
   <link rel="shortcut icon" href="../assets/img/logo/favicon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../app/style.css">
+
   <title>Barang - Yasz Storage Barang</title>
 </head>
 
@@ -148,6 +151,14 @@ if (isset($_POST['delete'])) {
                     <option value="minuman">Minuman</option>
                   </select>
                 </div>
+                <div class="form-group mt-3">
+                  <label for="">Supplier</label>
+                  <select name="suppl" class=" form-select aa" id="">
+                    <?php foreach ($sups as $sup) { ?>
+                      <option value="<?= $sup['id'] ?>"><?= $sup['nama'] ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
                 <p class="text-primary pp"><?php if (isset($alert)) {
                                               echo $alert;
                                             } ?></p>
@@ -182,6 +193,7 @@ if (isset($_POST['delete'])) {
                   <th>Harga</th>
                   <th>Kadaluwarsa</th>
                   <th>Jenis</th>
+                  <th>Supplier</th>
                   <th class="text-center">Aksi</th>
                 </tr>
               </thead>
@@ -196,6 +208,12 @@ if (isset($_POST['delete'])) {
                     <td><?= $supplier['harga'] ?></td>
                     <td><?= $supplier['kadaluwarsa'] ?></td>
                     <td><?= $supplier['jenis_barang'] ?></td>
+                    <?php
+                    $supps = $conn->query("SELECT nama FROM supplier where id = '$supplier[supplier_id]' ");
+                    ?>
+                    <?php foreach ($supps as $spp) { ?>
+                      <td><?= $spp['nama'] ?></td>
+                    <?php } ?>
                     <td class="justify-content-center d-flex gap-1">
                       <a href="../edit/edit_barang.php?id=<?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                       <form action="" method="post">

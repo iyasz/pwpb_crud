@@ -64,45 +64,13 @@ include "koneksi.php";
   <!-- end header  -->
 
   <!-- content  -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card shadow-sm">
-          <div class="card-body d-flex">
-            <div class="col-md-3 bg-pr d-flex rounded-3">
-              <i class='bx bx-user-pin p-4 bx-md bg-danger rounded-circle'></i>
-              <div class="ms-3">
-                <h5>Jumlah Admin</h5>
-                <p>15</p>
-              </div>
-            </div>
-            <div class="col-md-3 bg-pr d-flex rounded-3">
-              <i class='bx bx-user-pin p-4 bx-md bg-danger rounded-circle'></i>
-              <div class="ms-3">
-                <h5>Jumlah Admin</h5>
-                <p>15</p>
-              </div>
-            </div>
-            <div class="col-md-3 bg-pr d-flex rounded-3">
-              <i class='bx bx-user-pin p-4 bx-md bg-danger rounded-circle'></i>
-              <div class="ms-3">
-                <h5>Jumlah Admin</h5>
-                <p>15</p>
-              </div>
-            </div>
-            <div class="col-md-3 bg-pr d-flex rounded-3">
-              <i class='bx bx-user-pin p-4 bx-md bg-danger rounded-circle'></i>
-              <div class="ms-3">
-                <h5>Jumlah Admin</h5>
-                <p>15</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
+  <?php
+  include "app/views.php";
+
+  ?>
+
+  <!-- end constant -->
 
   <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>

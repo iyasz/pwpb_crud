@@ -37,6 +37,8 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../app/style.css">
+
     <title>Supplier - Yasz Storage Supplier</title>
 </head>
 <style>
