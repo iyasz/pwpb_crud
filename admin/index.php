@@ -50,7 +50,7 @@ if (isset($_POST['delete'])) {
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <title>Admin - Yasz Storage Supplier</title>
+    <title>Admin - Yasz Storage</title>
 </head>
 <style>
     .aa:focus {
@@ -120,11 +120,11 @@ if (isset($_POST['delete'])) {
                             <div class="row">
                                 <div class="form-group">
                                     <label for="">Nama <i class='bx bx-user'></i></label>
-                                    <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
+                                    <input autocomplete="off" type="text" name="nama" placeholder="Nama Admin" class="form-control mb-3 aa" required>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="">Username <i class='bx bx-user-pin'></i></label>
-                                    <input type="text" autocomplete="off" name="username" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
+                                    <input type="text" autocomplete="off" name="username" id="kontak" placeholder="Username Admin" required class="form-control mb-3 aa">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="">Password </label>
@@ -132,11 +132,11 @@ if (isset($_POST['delete'])) {
                                 </div>
                                 <div class="form-group ">
                                     <label for="">Telepon <i class='bx bx-phone'></i></label>
-                                    <input type="number" required name="telepon" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
+                                    <input type="number" required name="telepon" id="kontak" placeholder="Alamat Admin" autocomplete="off" class="form-control mb-3 aa">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="">Email <i class='bx bx-envelope'></i></label>
-                                    <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
+                                    <input type="text" required name="email" id="kontak" placeholder="Email Admin" autocomplete="off" class="form-control aa">
                                 </div>
                                 <p class="text-primary pp"><?php if (isset($alert)) {
                                                                 echo $alert;

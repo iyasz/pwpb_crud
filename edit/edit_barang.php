@@ -9,7 +9,7 @@ if (isset($_POST['submit'])) {
     $kode = htmlspecialchars($_POST['kode']);
     $nama = htmlspecialchars($_POST['nama']);
     $stok = htmlspecialchars($_POST['stok']);
-    $harga = number_format($_POST['harga']);
+    $harga = htmlspecialchars($_POST['harga']);
     $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
     $jenis = htmlspecialchars($_POST['jenis']);
 
@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
         echo '<script>location.replace("edit_barang.php"); </script>';
     } else {
         $update = $conn->query("UPDATE barang SET kode = '$kode', nama = '$nama', stok = '$stok', harga = '$harga', kadaluwarsa = '$kadaluwarsa', jenis_barang = '$jenis' WHERE id = '$id'");
-        $alert = "Data Berhasil Disimpan";
+        echo "<script>alert('Data Berhasil DI ubah')</script>";
         echo '<script>location.replace("../barang/index.php"); </script>';
     }
 }
