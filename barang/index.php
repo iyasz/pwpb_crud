@@ -209,11 +209,9 @@ if (isset($_POST['delete'])) {
                     <td><?= $supplier['kadaluwarsa'] ?></td>
                     <td><?= $supplier['jenis_barang'] ?></td>
                     <?php
-                    $supps = $conn->query("SELECT nama FROM supplier where id = '$supplier[supplier_id]' ");
+                    $supps = $conn->query("SELECT nama FROM supplier where id = '$supplier[supplier_id]' ")->fetch_assoc();
                     ?>
-                    <?php foreach ($supps as $spp) { ?>
-                      <td><?= $spp['nama'] ?></td>
-                    <?php } ?>
+                    <td><?= $supps['nama'] ?></td>
                     <td class="justify-content-center d-flex gap-1">
                       <a href="../edit/edit_barang.php?id=<?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                       <form action="" method="post">
