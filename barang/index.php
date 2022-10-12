@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
   $kode = htmlspecialchars($_POST['kode']);
   $nama = htmlspecialchars($_POST['nama']);
   $stok = htmlspecialchars($_POST['stok']);
-  $harga = number_format($_POST['harga']);
+  $harga = htmlspecialchars($_POST['harga']);
   $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
   $jenis = htmlspecialchars($_POST['jenis']);
 
