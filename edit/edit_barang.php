@@ -3,7 +3,7 @@
 include "../koneksi.php";
 
 $id = $_GET['id'];
-$data = $conn->query("SELECT * FROM barang WHERE id = '$id'")->fetch_assoc();
+$datas = $conn->query("SELECT * FROM barang WHERE id = '$id'")->fetch_assoc();
 
 if (isset($_POST['submit'])) {
     $kode = htmlspecialchars($_POST['kode']);
@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Masukan Jenis Barang')</script>";
         echo '<script>location.replace("edit_barang.php"); </script>';
     } else {
-        $update = $conn->query("UPDATE barang SET kode = '$kode', nama = '$nama', stok = '$stok', harga = '$harga', kadaluwarsa = '$kadaluwarsa', jenis_barang = '$jenis' WHERE kode = '$kode'");
+        $update = $conn->query("UPDATE barang SET kode = '$kode', nama = '$nama', stok = '$stok', harga = '$harga', kadaluwarsa = '$kadaluwarsa', jenis_barang = '$jenis' WHERE id = '$id'");
         $alert = "Data Berhasil Disimpan";
         echo '<script>location.replace("../barang/index.php"); </script>';
     }
