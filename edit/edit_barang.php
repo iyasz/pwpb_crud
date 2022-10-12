@@ -2,7 +2,8 @@
 
 include "../koneksi.php";
 
-$suppliers = $conn->query("SELECT * FROM barang");
+$id = $_GET['id'];
+$data = $conn->query("SELECT * FROM barang WHERE id = '$id'")->fetch_assoc();
 
 if (isset($_POST['submit'])) {
     $kode = htmlspecialchars($_POST['kode']);
@@ -12,31 +13,18 @@ if (isset($_POST['submit'])) {
     $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
     $jenis = htmlspecialchars($_POST['jenis']);
 
-    // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
+
+
     if ($jenis == "") {
         echo "<script>alert('Masukan Jenis Barang')</script>";
-        echo '<script>location.replace("index.php"); </script>';
+        echo '<script>location.replace("edit_barang.php"); </script>';
     } else {
-        $simpan = $conn->query("INSERT INTO barang (kode, nama,stok,harga,kadaluwarsa,jenis_barang) VALUES ('$kode','$nama','$stok','$harga','$kadaluwarsa','$jenis')");
+        $update = $conn->query("UPDATE barang SET kode = '$kode', nama = '$nama', stok = '$stok', harga = '$harga', kadaluwarsa = '$kadaluwarsa', jenis_barang = '$jenis' WHERE kode = '$kode'");
         $alert = "Data Berhasil Disimpan";
-        echo '<script>location.replace("index.php"); </script>';
+        echo '<script>location.replace("../barang/index.php"); </script>';
     }
-    // header('location: index.php');
-
-    // if (empty($nama) or empty($kontak) or empty($telp) or empty($alamat) or empty($email)) {
-    //     $alert = "Masukan Data dengan lengkap";
-    // } else {
-    //     $simpan;
-    //     echo '<script>location.replace("");</script>';
-    // }
 }
 
-if (isset($_POST['delete'])) {
-    $kode = htmlspecialchars($_POST['kode']);
-    $delete = mysqli_query($conn, "DELETE FROM barang where kode = '$kode'");
-
-    echo '<script>location.replace("index.php"); </script>';
-}
 
 ?>
 
@@ -107,44 +95,48 @@ if (isset($_POST['delete'])) {
     </fiv>
 
     <div class="mt-5">
-        <h1 class=" text-center mt-5 supp">Form Barang</h1>
+        <h1 class=" text-center mt-5 supp">Form Edit Barang</h1>
     </div>
     <div class="container mt-3 supp">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-lg mb-3">
                     <div class="card-header bg-dark mb-3">
-                        <h3 class="mb-0 text-white ps-5">Tambah Data Supplier</h3>
+                        <h3 class="mb-0 text-white ps-5">Update Data Supplier</h3>
                     </div>
                     <div class="card-body">
                         <form action="" method="post">
                             <div class="row">
                                 <div class="form-group">
                                     <label for="">Kode <i class='bx bx-user'></i></label>
-                                    <input autocomplete="off" type="text" name="kode" placeholder="Kode Barang" class="form-control mb-3 aa" required>
+                                    <input autocomplete="off" type="text" value="<?= $datas['kode'] ?>" name="kode" placeholder="Kode Barang" class="form-control mb-3 aa" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Nama <i class='bx bx-user'></i></label>
-                                    <input autocomplete="off" type="text" name="nama" placeholder="Nama Barang" class="form-control mb-3 aa" required>
+                                    <input autocomplete="off" type="text" name="nama" value="<?= $datas['nama'] ?>" placeholder="Nama Barang" class="form-control mb-3 aa" required>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="">Stok <i class='bx bx-user-pin'></i></label>
-                                    <input type="number" autocomplete="off" name="stok" placeholder="Stok Barang" required class="form-control mb-3 aa">
+                                    <input type="number" autocomplete="off" name="stok" value="<?= $datas['stok'] ?>" placeholder="Stok Barang" required class="form-control mb-3 aa">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="">Harga <i class='bx bx-phone'></i></label>
-                                    <input type="number" name="harga" required autocomplete="off" placeholder="Harga Barang" class="form-control mb-3 aa">
+                                    <input type="number" name="harga" required autocomplete="off" value="<?= $datas['harga'] ?>" placeholder="Harga Barang" class="form-control mb-3 aa">
                                 </div>
                                 <div class="form-group ">
                                     <label for="">Kadaluwarsa <i class='bx bx-home-alt-2'></i></label>
-                                    <input type="date" required name="kadaluwarsa" placeholder="Kadaluwarsa Barang" autocomplete="off" class="form-control mb-3 aa">
+                                    <input type="date" required name="kadaluwarsa" placeholder="Kadaluwarsa Barang" value="<?= $datas['kadaluwarsa'] ?>" autocomplete="off" class="form-control mb-3 aa">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="">Jenis Barang <i class='bx bx-envelope'></i></label>
                                     <select name="jenis" class="form-select aa" aria-label="Default select example">
                                         <option selected></option>
-                                        <option value="makanan">Makanan</option>
-                                        <option value="minum">Minum</option>
+                                        <option <?php if ($datas['jenis_barang'] == "makanan") {
+                                                    echo "selected";
+                                                } ?> value="makanan">Makanan</option>
+                                        <option <?php if ($datas['jenis_barang'] == "minuman") {
+                                                    echo "selected";
+                                                } ?> value="minuman">Minuman</option>
                                     </select>
                                 </div>
                                 <p class="text-primary pp"><?php if (isset($alert)) {
@@ -154,6 +146,7 @@ if (isset($_POST['delete'])) {
                                     <button class="btn btn-primary mt-4 btn-st" type="submit" name="submit">Submit</button>
 
                                     <button class="btn btn-danger mt-4" type="reset" name="btn-reset">Reset</button>
+                                    <a href="../barang/index.php" class="mt-4 btn btn-info">Kembali</a>
                                 </div>
                             </div>
                         </form>
