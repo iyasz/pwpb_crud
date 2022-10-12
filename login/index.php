@@ -31,6 +31,7 @@ if (isset($_POST['btn-masuk'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/img/logo/favicon.png">
     <title>Login - YaszStorage</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
@@ -75,9 +76,11 @@ if (isset($_POST['btn-masuk'])) {
             border-bottom: 1px solid gray;
             border-radius: 1px;
         }
+
         .sec-bot input:focus {
             box-shadow: none;
         }
+
         .sec-bot label {
             font-size: 14px;
         }
