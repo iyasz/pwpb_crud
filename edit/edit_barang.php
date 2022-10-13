@@ -2,7 +2,9 @@
 
 include "../koneksi.php";
 
+
 $id = $_GET['id'];
+$sups = $conn->query("SELECT * FROM supplier");
 $datas = $conn->query("SELECT * FROM barang WHERE id = '$id'")->fetch_assoc();
 
 if (isset($_POST['submit'])) {
@@ -12,6 +14,7 @@ if (isset($_POST['submit'])) {
     $harga = htmlspecialchars($_POST['harga']);
     $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
     $jenis = htmlspecialchars($_POST['jenis']);
+    $suppl = htmlspecialchars($_POST['suppl']);
 
 
 
@@ -19,7 +22,7 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Masukan Jenis Barang')</script>";
         echo '<script>location.replace("edit_barang.php"); </script>';
     } else {
-        $update = $conn->query("UPDATE barang SET kode = '$kode', nama = '$nama', stok = '$stok', harga = '$harga', kadaluwarsa = '$kadaluwarsa', jenis_barang = '$jenis' WHERE id = '$id'");
+        $update = $conn->query("UPDATE barang SET kode = '$kode', nama = '$nama', stok = '$stok', harga = '$harga', kadaluwarsa = '$kadaluwarsa', jenis_barang = '$jenis', supplier_id = '$suppl' WHERE id = '$id'");
         echo "<script>alert('Data Berhasil DI ubah')</script>";
         echo '<script>location.replace("../barang/index.php"); </script>';
     }
@@ -139,6 +142,14 @@ if (isset($_POST['submit'])) {
                                         <option <?php if ($datas['jenis_barang'] == "minuman") {
                                                     echo "selected";
                                                 } ?> value="minuman">Minuman</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="">Supplier</label>
+                                    <select name="suppl" class=" form-select aa" id="">
+                                        <?php foreach ($sups as $sup) { ?>
+                                            <option value="<?= $sup['id'] ?>" <?= $sup['id'] == $datas['supplier_id'] ? 'selected' : '' ?>><?= $sup['nama']  ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <p class="text-primary pp"><?php if (isset($alert)) {

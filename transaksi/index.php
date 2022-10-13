@@ -1,6 +1,44 @@
 <?php
 include "../koneksi.php";
 
+$barang = $conn->query("SELECT * FROM barang");
+$admin = $conn->query("SELECT * FROM admin");
+
+if (isset($_POST['submit'])) {
+    $kode = htmlspecialchars($_POST['kode']);
+    $nama = htmlspecialchars($_POST['nama']);
+    $stok = htmlspecialchars($_POST['stok']);
+    $harga = htmlspecialchars($_POST['harga']);
+    $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
+    $jenis = htmlspecialchars($_POST['jenis']);
+    $supp = htmlspecialchars($_POST['suppl']);
+
+    // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
+    if ($jenis == "") {
+        echo "<script>alert('Masukan Jenis Barang')</script>";
+        echo '<script>location.replace("index.php"); </script>';
+    } else {
+        $simpan = $conn->query("INSERT INTO barang (kode, nama,stok,harga,kadaluwarsa,jenis_barang,supplier_id) VALUES ('$kode','$nama','$stok','$harga','$kadaluwarsa','$jenis','$supp')");
+        $alert = "Data Berhasil Disimpan";
+        echo '<script>location.replace("index.php"); </script>';
+    }
+    // header('location: index.php');
+
+    // if (empty($nama) or empty($kontak) or empty($telp) or empty($alamat) or empty($email)) {
+    //     $alert = "Masukan Data dengan lengkap";
+    // } else {
+    //     $simpan;
+    //     echo '<script>location.replace("");</script>';
+    // }
+}
+
+if (isset($_POST['delete'])) {
+    $id = htmlspecialchars($_POST['id']);
+    $delete = mysqli_query($conn, "DELETE FROM barang where id = '$id'");
+
+    echo '<script>location.replace("index.php"); </script>';
+}
+
 
 
 
@@ -76,37 +114,64 @@ include "../koneksi.php";
 
 
     <div class="mt-5">
-        <h1 class=" text-center mt-5 supp animate__animated animate__fadeInRight">Form Admin</h1>
+        <h1 class=" text-center mt-5 supp animate__animated animate__fadeInRight">Form Transaksi</h1>
     </div>
     <div class="container mt-3 supp">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-lg mb-3 animate__animated animate__fadeInRight">
                     <div class="card-header bg-dark mb-3 ">
-                        <h3 class="mb-0 text-white ps-5 animate__animated animate__fadeInRight">Tambah Data Admin</h3>
+                        <h3 class="mb-0 text-white ps-5 animate__animated animate__fadeInRight">Tambah Data Transaksi</h3>
                     </div>
                     <div class="card-body ">
                         <form action="" method="post">
                             <div class="row">
-                                <div class="form-group">
-                                    <label for="">Nama <i class='bx bx-user'></i></label>
-                                    <input autocomplete="off" type="text" name="nama" placeholder="Nama Admin" class="form-control mb-3 aa" required>
+                                <div class="form-group mb-3">
+                                    <label for="">Admin <i class='bx bx-user'></i></label>
+                                    <select name="suppl" required class=" form-select aa" id="">
+                                        <option value="" selected></option>
+                                        <?php foreach ($admin as $adm) { ?>
+                                            <option value="<?= $adm['id'] ?>"><?= $adm['nama'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label for="">Username <i class='bx bx-user-pin'></i></label>
-                                    <input type="text" autocomplete="off" name="username" id="kontak" placeholder="Username Admin" required class="form-control mb-3 aa">
-                                </div>
-                                <div class="form-group mt-3">
-                                    <label for="">Password </label>
-                                    <input type="text" name="password" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
+                                <div class="form-group mb-3">
+                                    <label for="">Nama Barang <i class='bx bx-user'></i></label>
+                                    <select name="suppl" required class=" form-select aa" id="">
+                                        <option value="" selected></option>
+                                        <?php foreach ($barang as $brg) { ?>
+                                            <option value="<?= $brg['id'] ?>"><?= $brg['nama'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                                 <div class="form-group ">
-                                    <label for="">Telepon <i class='bx bx-phone'></i></label>
-                                    <input type="number" required name="telepon" id="kontak" placeholder="Alamat Admin" autocomplete="off" class="form-control mb-3 aa">
+                                    <label for="">Tanggal Transaksi <i class='bx bx-home-alt-2'></i></label>
+                                    <input type="date" required name="kadaluwarsa" placeholder="Kadaluwarsa Barang" autocomplete="off" class="form-control mb-3 aa">
                                 </div>
+                                <div class="form-group">
+                                    <label for="">Jumlah <i class='bx bx-envelope'></i></label>
+                                    <input autocomplete="off" type="number" name="nama" placeholder="Nama Admin" class="form-control mb-3 aa" required>
+                                </div>
+
                                 <div class="form-group mt-3">
-                                    <label for="">Email <i class='bx bx-envelope'></i></label>
-                                    <input type="text" required name="email" id="kontak" placeholder="Email Admin" autocomplete="off" class="form-control aa">
+                                    <label for="">Total <i class='bx bx-user-pin'></i></label>
+                                    <input type="text" autocomplete="off" name="username" id="kontak" placeholder="Username Admin" required class="form-control mb-3 aa">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="">Status <i class='bx bx-envelope'></i></label>
+                                    <select name="jenis" class="form-select aa" aria-label="Default select example">
+                                        <option selected></option>
+                                        <option value="makanan">Makanan</option>
+                                        <option value="minuman">Minuman</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="">Tipe <i class='bx bx-envelope'></i></label>
+                                    <select name="jenis" class="form-select aa" aria-label="Default select example">
+                                        <option selected></option>
+                                        <option value="makanan">Makanan</option>
+                                        <option value="minuman">Minuman</option>
+                                    </select>
                                 </div>
                                 <p class="text-primary pp"><?php if (isset($alert)) {
                                                                 echo $alert;
