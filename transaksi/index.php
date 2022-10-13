@@ -8,7 +8,7 @@ $transaksif = $conn->query("SELECT status FROM transaksi");
 
 if (isset($_POST['submit'])) {
     $kode = htmlspecialchars($_POST['kode']);
-    $nama = htmlspecialchars($_POST['nama']);
+    $namabarang = htmlspecialchars($_POST['namabarang']);
     $stok = htmlspecialchars($_POST['stok']);
     $harga = htmlspecialchars($_POST['harga']);
     $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
@@ -42,11 +42,17 @@ if (isset($_POST['delete'])) {
 }
 
 if (isset($_POST['hitung'])) {
+    $namabarang = htmlspecialchars($_POST['namabarang']);
     $jumlah = htmlspecialchars($_POST['jumlah']);
     $total = htmlspecialchars($_POST['total']);
+    $hargaBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
 
-    $aritmatika = $jumlah * 9;
+    $aritmatika = $jumlah * $hargaBrg['harga'];
 }
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
 
 
 ?>
@@ -144,7 +150,7 @@ if (isset($_POST['hitung'])) {
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="">Nama Barang <i class='bx bx-user'></i></label>
-                                    <select name="suppl" required class=" form-select aa" id="">
+                                    <select name="namabarang" required class=" form-select aa" id="">
                                         <option value="" selected></option>
                                         <?php foreach ($barang as $brg) { ?>
                                             <option value="<?= $brg['id'] ?>"><?= $brg['nama'] ?></option>
@@ -162,7 +168,9 @@ if (isset($_POST['hitung'])) {
 
                                 <div class="form-group mt-3">
                                     <label for="">Total <i class='bx bx-user-pin'></i></label>
-                                    <input type="text" value="<?= isset($aritmatika) ?? ''; ?>" autocomplete="off" name="total" id="total" placeholder="Total Harga" class="form-control mb-3 aa">
+                                    <input type="text" value="<?php if (isset($aritmatika)) {
+                                                                    echo $aritmatika;
+                                                                } ?>" autocomplete="off" name="total" id="total" placeholder="Total Harga" class="form-control mb-3 aa">
                                 </div>
                                 <button class="btn btn-primary mb-3" type="" name="hitung">Hitung</button>
                                 <div class="form-group mb-3">
