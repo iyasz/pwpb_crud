@@ -7,22 +7,18 @@ $transaksi = $conn->query("SELECT * FROM transaksi");
 $transaksif = $conn->query("SELECT status FROM transaksi");
 
 if (isset($_POST['submit'])) {
-    $kode = htmlspecialchars($_POST['kode']);
+    $adminS = htmlspecialchars($_POST['adm']);
     $namabarang = htmlspecialchars($_POST['namabarang']);
-    $stok = htmlspecialchars($_POST['stok']);
-    $harga = htmlspecialchars($_POST['harga']);
-    $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
-    $jenis = htmlspecialchars($_POST['jenis']);
-    $supp = htmlspecialchars($_POST['suppl']);
+    $tgltr = htmlspecialchars($_POST['tgltr']);
+    $jumlah = htmlspecialchars($_POST['jumlah']);
+    $total = htmlspecialchars($_POST['total']);
+    $status = htmlspecialchars($_POST['status']);
+    $tipe = htmlspecialchars($_POST['tipe']);
 
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
-    if ($jenis == "") {
-        echo "<script>alert('Masukan Jenis Barang')</script>";
-        echo '<script>location.replace("index.php"); </script>';
-    } else {
-        $simpan = $conn->query("INSERT INTO barang (kode, nama,stok,harga,kadaluwarsa,jenis_barang,supplier_id) VALUES ('$kode','$nama','$stok','$harga','$kadaluwarsa','$jenis','$supp')");
-        $alert = "Data Berhasil Disimpan";
-        echo '<script>location.replace("index.php"); </script>';
+    if ($tipe == "Masuk") {
+        $simpan = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,total_harga,status,tipe) VALUES ('$adminS','$namabarang','$tgltr','$jumlah','$total','$status','$tipe')");
+        echo '<script>alert("Data Transaksi Disimpan"); location.replace("index.php"); </script>';
     }
     // header('location: index.php');
 
@@ -49,11 +45,6 @@ if (isset($_POST['hitung'])) {
 
     $aritmatika = $jumlah * $hargaBrg['harga'];
 }
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-
 
 ?>
 
@@ -141,7 +132,7 @@ echo "<br>";
                             <div class="row">
                                 <div class="form-group mb-3">
                                     <label for="">Admin <i class='bx bx-user'></i></label>
-                                    <select name="suppl" required class=" form-select aa" id="">
+                                    <select name="adm" required class=" form-select aa" id="">
                                         <option value="" selected></option>
                                         <?php foreach ($admin as $adm) { ?>
                                             <option value="<?= $adm['id'] ?>"><?= $adm['nama'] ?></option>
@@ -159,7 +150,7 @@ echo "<br>";
                                 </div>
                                 <div class="form-group ">
                                     <label for="">Tanggal Transaksi <i class='bx bx-home-alt-2'></i></label>
-                                    <input type="date" required name="kadaluwarsa" placeholder="Kadaluwarsa Barang" autocomplete="off" class="form-control mb-3 aa">
+                                    <input type="date" required name="tgltr" placeholder="Kadaluwarsa Barang" autocomplete="off" class="form-control mb-3 aa">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Jumlah <i class='bx bx-envelope'></i></label>
@@ -175,7 +166,7 @@ echo "<br>";
                                 <button class="btn btn-primary mb-3" type="" name="hitung">Hitung</button>
                                 <div class="form-group mb-3">
                                     <label for="">Status <i class='bx bx-envelope'></i></label>
-                                    <select name="jenis" required class="form-select aa" aria-label="Default select example">
+                                    <select name="status" required class="form-select aa" aria-label="Default select example">
                                         <option selected></option>
                                         <option value="Pending">Pending</option>
                                         <option value="Paid">Paid</option>
@@ -184,7 +175,7 @@ echo "<br>";
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="">Tipe <i class='bx bx-envelope'></i></label>
-                                    <select name="jenis" required class="form-select aa" aria-label="Default select example">
+                                    <select name="tipe" required class="form-select aa" aria-label="Default select example">
                                         <option selected></option>
                                         <option value="Masuk">Masuk</option>
                                         <option value="Keluar">Keluar</option>
@@ -218,28 +209,32 @@ echo "<br>";
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nama</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>No .Telp</th>
-                                    <th>Email</th>
+                                    <th>Admin</th>
+                                    <th>Barang</th>
+                                    <th>Tanggal Transaksi</th>
+                                    <th>Jumlah</th>
+                                    <th>Total Harga</th>
+                                    <th>Status</th>
+                                    <th>Tipe</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1;
-                                foreach ($admin as $admins) { ?>
+                                foreach ($transaksi as $transak) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $admins['nama'] ?></td>
-                                        <td><?= $admins['username'] ?></td>
-                                        <td><?= $admins['password'] ?></td>
-                                        <td><?= $admins['telepon'] ?></td>
-                                        <td><?= $admins['email'] ?></td>
+                                        <td><?= $transak['id_adm'] ?></td>
+                                        <td><?= $transak['barang_id'] ?></td>
+                                        <td><?= $transak['tgl_transaksi'] ?></td>
+                                        <td><?= $transak['jumlah'] ?></td>
+                                        <td><?= $transak['total_harga'] ?></td>
+                                        <td><?= $transak['status'] ?></td>
+                                        <td><?= $transak['tipe'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
-                                            <a href="../edit/edit_admin.php?id=<?= $admins['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="../edit/edit_admin.php?id=<?= $transak['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
-                                                <input type="hidden" name="id" value="<?= $admins['id'] ?>">
+                                                <input type="hidden" name="id" value="<?= $transak['id'] ?>">
                                                 <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </td>
