@@ -3,6 +3,8 @@ include "../koneksi.php";
 
 $barang = $conn->query("SELECT * FROM barang");
 $admin = $conn->query("SELECT * FROM admin");
+$transaksi = $conn->query("SELECT * FROM transaksi");
+$transaksif = $conn->query("SELECT status FROM transaksi");
 
 if (isset($_POST['submit'])) {
     $kode = htmlspecialchars($_POST['kode']);
@@ -39,7 +41,12 @@ if (isset($_POST['delete'])) {
     echo '<script>location.replace("index.php"); </script>';
 }
 
+if (isset($_POST['hitung'])) {
+    $jumlah = htmlspecialchars($_POST['jumlah']);
+    $total = htmlspecialchars($_POST['total']);
 
+    $aritmatika = $jumlah * 9;
+}
 
 
 ?>
@@ -150,27 +157,29 @@ if (isset($_POST['delete'])) {
                                 </div>
                                 <div class="form-group">
                                     <label for="">Jumlah <i class='bx bx-envelope'></i></label>
-                                    <input autocomplete="off" type="number" name="nama" placeholder="Nama Admin" class="form-control mb-3 aa" required>
+                                    <input autocomplete="off" type="number" name="jumlah" id="jml" placeholder="Jumlah Barang" class="form-control mb-3 aa" required>
                                 </div>
 
                                 <div class="form-group mt-3">
                                     <label for="">Total <i class='bx bx-user-pin'></i></label>
-                                    <input type="text" autocomplete="off" name="username" id="kontak" placeholder="Username Admin" required class="form-control mb-3 aa">
+                                    <input type="text" value="<?= isset($aritmatika) ?? ''; ?>" autocomplete="off" name="total" id="total" placeholder="Total Harga" class="form-control mb-3 aa">
                                 </div>
+                                <button class="btn btn-primary mb-3" type="" name="hitung">Hitung</button>
                                 <div class="form-group mb-3">
                                     <label for="">Status <i class='bx bx-envelope'></i></label>
-                                    <select name="jenis" class="form-select aa" aria-label="Default select example">
+                                    <select name="jenis" required class="form-select aa" aria-label="Default select example">
                                         <option selected></option>
-                                        <option value="makanan">Makanan</option>
-                                        <option value="minuman">Minuman</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Paid">Paid</option>
+                                        <option value="Success">Success</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="">Tipe <i class='bx bx-envelope'></i></label>
-                                    <select name="jenis" class="form-select aa" aria-label="Default select example">
+                                    <select name="jenis" required class="form-select aa" aria-label="Default select example">
                                         <option selected></option>
-                                        <option value="makanan">Makanan</option>
-                                        <option value="minuman">Minuman</option>
+                                        <option value="Masuk">Masuk</option>
+                                        <option value="Keluar">Keluar</option>
                                     </select>
                                 </div>
                                 <p class="text-primary pp"><?php if (isset($alert)) {
@@ -236,6 +245,7 @@ if (isset($_POST['delete'])) {
         </div>
     </div>
 
+    <script src="../app/script.js"></script>
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 </body>

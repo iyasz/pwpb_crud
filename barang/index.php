@@ -145,7 +145,7 @@ if (isset($_POST['delete'])) {
                 </div>
                 <div class="form-group mt-3">
                   <label for="">Jenis Barang <i class='bx bx-envelope'></i></label>
-                  <select name="jenis" class="form-select aa" aria-label="Default select example">
+                  <select name="jenis" required class="form-select aa" aria-label="Default select example">
                     <option selected></option>
                     <option value="makanan">Makanan</option>
                     <option value="minuman">Minuman</option>
@@ -153,7 +153,8 @@ if (isset($_POST['delete'])) {
                 </div>
                 <div class="form-group mt-3">
                   <label for="">Supplier</label>
-                  <select name="suppl" class=" form-select aa" id="">
+                  <select name="suppl" required class=" form-select aa" id="">
+                    <option selected></option>
                     <?php foreach ($sups as $sup) { ?>
                       <option value="<?= $sup['id'] ?>"><?= $sup['nama'] ?></option>
                     <?php } ?>
