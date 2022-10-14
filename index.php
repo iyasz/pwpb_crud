@@ -51,11 +51,11 @@ include "koneksi.php";
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav p-1 mx-auto">
-          <a class="nav-link active" href="">Home</a>
+          <!-- <a class="nav-link active" href="">Home</a>
           <a class="nav-link" href="barang/">Barang</a>
           <a class="nav-link" href="supplier/">Supplier</a>
           <a class="nav-link" href="transaksi/">Transaksi</a>
-          <a class="nav-link" href="admin/">Admin</a>
+          <a class="nav-link" href="admin/">Admin</a> -->
 
         </div>
         <div class="navbar-nav p-1 text-center">
@@ -75,15 +75,18 @@ include "koneksi.php";
           <h3 class="modal-tittle">Login</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body mx-3">
           <div class="form-group">
-            <input class="form-control" type="text" name="" id="">
-            <label for="">Anime</label>
+            <input class="form-control validate" type="text" name="" id="">
+            <label for="">Username</label>
           </div>
           <div class="form-group">
-            <input class="form-control" type="text" name="" id="">
-            <label for="">Anime</label>
+            <input class="form-control valiedate" type="text" name="" id="">
+            <label for="">Password</label>
           </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <p class="">Copyright All Right Reserved</p>
         </div>
       </div>
     </div>
