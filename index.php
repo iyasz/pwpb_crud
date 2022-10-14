@@ -58,12 +58,36 @@ include "koneksi.php";
           <a class="nav-link" href="admin/">Admin</a>
 
         </div>
+        <div class="navbar-nav p-1 text-center">
+          <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#loginPage">Login</a>
+        </div>
       </div>
     </div>
   </div>
   <!-- end header  -->
 
   <!-- content  -->
+
+  <div class="modal fade" id="loginPage">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-tittle">Login</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input class="form-control" type="text" name="" id="">
+            <label for="">Anime</label>
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="" id="">
+            <label for="">Anime</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <?php
   include "app/views.php";

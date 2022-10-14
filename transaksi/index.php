@@ -17,9 +17,15 @@ if (isset($_POST['submit'])) {
 
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
     if ($tipe == "Masuk") {
+        $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
         $simpan = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,total_harga,status,tipe) VALUES ('$adminS','$namabarang','$tgltr','$jumlah','$total','$status','$tipe')");
+
+        $masukBrgStok = $selectBrg['stok'] + $jumlah;
+        $masukBrgHarga = $selectBrg['harga'] + $total;
+        $updateBrg = $conn->query("UPDATE barang SET stok = '$masukBrgStok', harga = '$masukBrgHarga' WHERE id = '$selectBrg[id]'");
         echo '<script>alert("Data Transaksi Disimpan"); location.replace("index.php"); </script>';
     }
+
     // header('location: index.php');
 
     // if (empty($nama) or empty($kontak) or empty($telp) or empty($alamat) or empty($email)) {
@@ -30,9 +36,10 @@ if (isset($_POST['submit'])) {
     // }
 }
 
+
 if (isset($_POST['delete'])) {
     $id = htmlspecialchars($_POST['id']);
-    $delete = mysqli_query($conn, "DELETE FROM barang where id = '$id'");
+    $delete = mysqli_query($conn, "DELETE FROM transaksi where id = '$id'");
 
     echo '<script>location.replace("index.php"); </script>';
 }
@@ -163,7 +170,7 @@ if (isset($_POST['hitung'])) {
                                                                     echo $aritmatika;
                                                                 } ?>" autocomplete="off" name="total" id="total" placeholder="Total Harga" class="form-control mb-3 aa">
                                 </div>
-                                <button class="btn btn-primary mb-3" type="" name="hitung">Hitung</button>
+                                <a class="btn btn-primary mb-3" onclick="totalharga()">Hitung</a>
                                 <div class="form-group mb-3">
                                     <label for="">Status <i class='bx bx-envelope'></i></label>
                                     <select name="status" required class="form-select aa" aria-label="Default select example">
@@ -224,7 +231,7 @@ if (isset($_POST['hitung'])) {
                                 foreach ($transaksi as $transak) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $transak['id_adm'] ?></td>
+                                        <td><?= $transak['id_admin'] ?></td>
                                         <td><?= $transak['barang_id'] ?></td>
                                         <td><?= $transak['tgl_transaksi'] ?></td>
                                         <td><?= $transak['jumlah'] ?></td>
@@ -251,6 +258,23 @@ if (isset($_POST['hitung'])) {
     <script src="../app/script.js"></script>
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <?php
+    $namabarang = htmlspecialchars($_POST['namabarang']);
+    $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
+
+    ?>
+    <script>
+        const jumlah = document.getElementById("jml").value;
+        const total = document.getElementById("total");
+        const harga = <?= $selectBrg['harga'] ?>;
+
+        // jumlah.addEventListener("keyup", () => {
+        //   jumlah * jumlah = total;
+        // });
+        function totalharga() {
+            total.value = jumlah * harga;
+        }
+    </script>
 </body>
 
 </html>
