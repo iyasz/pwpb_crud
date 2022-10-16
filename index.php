@@ -3,30 +3,30 @@ include "koneksi.php";
 $errs = [];
 $olds = [];
 
-if (isset($_POST['masuk'])) {
-  $username = htmlspecialchars($_POST['username']);
-  $password = htmlspecialchars($_POST['password']);
+// if (isset($_POST['masuk'])) {
+//   $username = htmlspecialchars($_POST['username']);
+//   $password = htmlspecialchars($_POST['password']);
 
-  if (empty($username)) {
-    $errs['empty_username'] = "Masukan Username Anda";
-    $select_username = $conn->query("SELECT * FROM admin WHERE username = '$username'")->num_rows;
-  } elseif ($select_username < 1) {
-    $errs['rows_empty_user'] = "Username Anda Tidak Terdaftar!";
-  }
+//   if (empty($username)) {
+//     $errs['empty_username'] = "Masukan Username Anda";
+//     $select_username = $conn->query("SELECT * FROM admin WHERE username = '$username'")->num_rows;
+//   } elseif ($select_username < 1) {
+//     $errs['rows_empty_user'] = "Username Anda Tidak Terdaftar!";
+//   }
 
 
-  if (empty($password)) {
-    $errs['empty_password'] = "Masukan Password Anda";
-    $select_password = $conn->query("SELECT * FROM admin WHERE password = '$password'")->num_rows;
-  } elseif ($select_password < 1) {
-    $errs['rows_empty_pw'] = "Password Anda Salah!";
-    $olds['email'] = $_POST['email'];
-  }
+//   if (empty($password)) {
+//     $errs['empty_password'] = "Masukan Password Anda";
+//     $select_password = $conn->query("SELECT * FROM admin WHERE password = '$password'")->num_rows;
+//   } elseif ($select_password < 1) {
+//     $errs['rows_empty_pw'] = "Password Anda Salah!";
+//     $olds['email'] = $_POST['email'];
+//   }
 
-  if (empty($errs)) {
-    $nav = true;
-  }
-}
+//   if (empty($errs)) {
+//     $nav = true;
+//   }
+// }
 
 
 
@@ -80,15 +80,11 @@ if (isset($_POST['masuk'])) {
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav p-1 mx-auto">
-          <?php if (isset($nav)) {
-            echo '
-            <a class="nav-link active" href="">Home</a>
-            <a class="nav-link" href="barang/">Barang</a>
-            <a class="nav-link" href="supplier/">Supplier</a>
-            <a class="nav-link" href="transaksi/">Transaksi</a>
-            <a class="nav-link" href="admin/">Admin</a>
-            ';
-          }  ?>
+          <a class="nav-link active" href="">Home</a>
+          <a class="nav-link" href="barang/">Barang</a>
+          <a class="nav-link" href="supplier/">Supplier</a>
+          <a class="nav-link" href="transaksi/">Transaksi</a>
+          <a class="nav-link" href="admin/">Admin</a>
 
         </div>
         <div class="navbar-nav p-1 text-center">
@@ -100,7 +96,7 @@ if (isset($_POST['masuk'])) {
   <!-- end header  -->
 
   <!-- content  -->
-  <form action="" method="post">
+  <!-- <form action="" method="post">
 
     <div class="modal fade" id="loginPage">
       <div class="modal-dialog modal-dialog-centered">
@@ -126,7 +122,7 @@ if (isset($_POST['masuk'])) {
         </div>
       </div>
     </div>
-  </form>
+  </form> -->
 
   <?php
   include "app/views.php";
