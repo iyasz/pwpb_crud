@@ -101,6 +101,7 @@ if (isset($_POST['delete'])) {
                     <a class="nav-link" href="../supplier/">Supplier</a>
                     <a class="nav-link " href="../transaksi/">Transaksi</a>
                     <a class="nav-link active" href="">Admin</a>
+                    <a class="nav-link " href="../rak/">Rak</a>
 
                 </div>
             </div>
