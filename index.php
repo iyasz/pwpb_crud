@@ -1,5 +1,34 @@
 <?php
 include "koneksi.php";
+$errs = [];
+$olds = [];
+
+if (isset($_POST['masuk'])) {
+  $username = htmlspecialchars($_POST['username']);
+  $password = htmlspecialchars($_POST['password']);
+
+  if (empty($username)) {
+    $errs['empty_username'] = "Masukan Username Anda";
+    $select_username = $conn->query("SELECT * FROM admin WHERE username = '$username'")->num_rows;
+  } elseif ($select_username < 1) {
+    $errs['rows_empty_user'] = "Username Anda Tidak Terdaftar!";
+  }
+
+
+  if (empty($password)) {
+    $errs['empty_password'] = "Masukan Password Anda";
+    $select_password = $conn->query("SELECT * FROM admin WHERE password = '$password'")->num_rows;
+  } elseif ($select_password < 1) {
+    $errs['rows_empty_pw'] = "Password Anda Salah!";
+    $olds['email'] = $_POST['email'];
+  }
+
+  if (empty($errs)) {
+    $nav = true;
+  }
+}
+
+
 
 
 ?>
@@ -51,11 +80,15 @@ include "koneksi.php";
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav p-1 mx-auto">
-          <!-- <a class="nav-link active" href="">Home</a>
-          <a class="nav-link" href="barang/">Barang</a>
-          <a class="nav-link" href="supplier/">Supplier</a>
-          <a class="nav-link" href="transaksi/">Transaksi</a>
-          <a class="nav-link" href="admin/">Admin</a> -->
+          <?php if (isset($nav)) {
+            echo '
+            <a class="nav-link active" href="">Home</a>
+            <a class="nav-link" href="barang/">Barang</a>
+            <a class="nav-link" href="supplier/">Supplier</a>
+            <a class="nav-link" href="transaksi/">Transaksi</a>
+            <a class="nav-link" href="admin/">Admin</a>
+            ';
+          }  ?>
 
         </div>
         <div class="navbar-nav p-1 text-center">
@@ -67,30 +100,33 @@ include "koneksi.php";
   <!-- end header  -->
 
   <!-- content  -->
+  <form action="" method="post">
 
-  <div class="modal fade" id="loginPage">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-tittle">Login</h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body mx-3">
-          <div class="form-group">
-            <input class="form-control validate" type="text" name="" id="">
-            <label for="">Username</label>
+    <div class="modal fade" id="loginPage">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-tittle">Login</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="form-group">
-            <input class="form-control valiedate" type="text" name="" id="">
-            <label for="">Password</label>
+          <div class="modal-body mx-3">
+            <div class="form-group">
+              <label for="">Username</label>
+              <input name="username" autocomplete="off" class="form-control " type="text" name="" id="">
+            </div>
+            <div class="form-group">
+              <label for="">Password</label>
+              <input class="form-control " autocomplete="off" name="password" type="text" name="" id="">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3" name="post_masuk">Masuk</button>
           </div>
-        </div>
-        <div class="modal-footer justify-content-center">
-          <p class="">Copyright All Right Reserved</p>
+          <div class="modal-footer justify-content-center">
+            <p class="">Copyright All Right Reserved</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 
   <?php
   include "app/views.php";
