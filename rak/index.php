@@ -101,7 +101,7 @@ if (isset($_POST['delete'])) {
                 <div class="navbar-nav mx-auto p-1">
                     <a class="nav-link " aria-current="page" href="../">Home</a>
                     <a class="nav-link" href="../barang/">Barang</a>
-                    <a class="nav-link " href="">Supplier</a>
+                    <a class="nav-link " href="../supplier/">Supplier</a>
                     <a class="nav-link " href="../transaksi/">Transaksi</a>
                     <a class="nav-link " href="../admin/">Admin</a>
                     <a class="nav-link  active" href="">Rak</a>
@@ -112,14 +112,14 @@ if (isset($_POST['delete'])) {
     </div>
 
     <div class="mt-5">
-        <h1 class=" text-center mt-5 supp">Form Supplier</h1>
+        <h1 class=" text-center mt-5 supp">Form Rak</h1>
     </div>
     <div class="container mt-3 supp">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card shadow-lg mb-3">
                     <div class="card-header bg-dark mb-3">
-                        <h3 class="mb-0 text-white ps-5">Tambah Data Supplier</h3>
+                        <h3 class="mb-0 text-white ps-5">Tambah Data Rak</h3>
                     </div>
                     <div class="card-body">
                         <form action="" method="post">
