@@ -7,16 +7,16 @@ $transaksi = $conn->query("SELECT * FROM transaksi");
 $rak = $conn->query("SELECT * FROM rak");
 
 if (isset($_POST['submit'])) {
-    $nama = htmlspecialchars($_POST['nama']);
-    $kontak = htmlspecialchars($_POST['kontak']);
-    $telp = htmlspecialchars($_POST['telp']);
-    $alamat = htmlspecialchars($_POST['alamat']);
-    $email = htmlspecialchars($_POST['email']);
+    $ruang = htmlspecialchars($_POST['ruang']);
+    $baris = htmlspecialchars($_POST['baris']);
+    $rak = htmlspecialchars($_POST['rak']);
+    $trid = htmlspecialchars($_POST['trid']);
 
+    $simpan = $conn->query("INSERT INTO transaksi VALUES (NULL, '$ruang','$baris','$rak','$trid')");
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
-    $simpan = mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
+    // $simpan = mysqli_query($conn, "INSERT INTO supplier(nama,kontak,telp,alamat,email) VALUES ('$nama','$kontak','$telp','$alamat','$email') ");
 
-    if ($simpan) {
+    if ($simpan == TRUE) {
         $alert = "Data Berhasil Disimpan";
         echo '<script>location.replace("index.php"); </script>';
         // header('location: index.php');
@@ -128,7 +128,7 @@ if (isset($_POST['delete'])) {
                             <div class="row">
                                 <div class="form-group mb-3">
                                     <label for="">Ruang Rak <i class='bx bx-user'></i></label>
-                                    <select name="namabarang" required class=" form-select aa" id="">
+                                    <select name="ruang" required class=" form-select aa" id="">
                                         <option value="" selected></option>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
@@ -140,7 +140,7 @@ if (isset($_POST['delete'])) {
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="">Baris Ruang <i class='bx bx-user'></i></label>
-                                    <select name="namabarang" required class=" form-select aa" id="">
+                                    <select name="baris" required class=" form-select aa" id="">
                                         <option value="" selected></option>
                                         <option value="R-1">R-1</option>
                                         <option value="R-2">R-2</option>
@@ -161,7 +161,7 @@ if (isset($_POST['delete'])) {
                                 </div>
                                 <div class="form-group mb-3 ">
                                     <label for="">Rak Kode <i class='bx bx-home-alt-2'></i></label>
-                                    <input type="text" required name="alamat" id="kontak" placeholder="Masukan Rak Kode" autocomplete="off" class="form-control mb-3 aa">
+                                    <input type="text" required name="rak" id="kontak" placeholder="Masukan Rak Kode" autocomplete="off" class="form-control mb-3 aa">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="">Transaksi Id <i class='bx bx-user'></i></label>
@@ -172,9 +172,6 @@ if (isset($_POST['delete'])) {
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <p class="text-primary pp"><?php if (isset($alert)) {
-                                                                echo $alert;
-                                                            } ?></p>
                                 <div class="form-group text-end mt-4">
                                     <button class="btn btn-primary mt-4 btn-st" type="submit" name="submit">Submit</button>
 
@@ -212,10 +209,10 @@ if (isset($_POST['delete'])) {
                                 foreach ($transaksi as $trans) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $supplier['nama'] ?></td>
-                                        <td><?= $supplier['kontak'] ?></td>
-                                        <td><?= $supplier['telp'] ?></td>
-                                        <td><?= $supplier['alamat'] ?></td>
+                                        <td><?= $trans['ruang_rak'] ?></td>
+                                        <td><?= $trans['baris_ruang'] ?></td>
+                                        <td><?= $trans['rak_kode'] ?></td>
+                                        <td><?= $trans['id_transaksi'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
                                             <a href="../edit/edit_supp.php?id=<?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
