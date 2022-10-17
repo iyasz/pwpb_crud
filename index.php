@@ -65,6 +65,10 @@ $infoSupplier = mysqli_num_rows($supplier);
       top: 120px;
     }
 
+    .bg-danger {
+      background-color: #404142 !important;
+    }
+
     .na {
       position: fixed;
       top: 0;
@@ -110,23 +114,32 @@ $infoSupplier = mysqli_num_rows($supplier);
       <div class="col-lg-12">
         <div class="card shadow">
           <div class="card-body">
-            <div class="row  ">
-              <div class="col-lg-4">
-                <div class="text-bg-dark rounded text-center">
-                  <p>Jumlah Admin</p>
-                  <h1><?= $infoAdmin ?></h1>
+            <div class="row ">
+              <div class="col-lg-4 py-3">
+                <div class="text-bg-dark py-3 rounded text-center d-flex align-items-center justify-content-center">
+                  <i class='bx bx-user bx-lg bg-danger rounded-circle p-2'></i>
+                  <div class="form-group px-4">
+                    <p>Jumlah Admin</p>
+                    <h1><?= $infoAdmin ?></h1>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-4 ">
-                <div class="text-bg-dark rounded text-center">
-                  <p>Jumlah Barang</p>
-                  <h1><?= $infoBarang  ?></h1>
+              <div class="col-lg-4 py-3">
+                <div class="text-bg-dark py-3 rounded text-center d-flex align-items-center justify-content-center">
+                  <i class='bx bx-cube bx-lg bg-danger rounded-circle p-2'></i>
+                  <div class="form-group px-4">
+                    <p>Jumlah Barang</p>
+                    <h1><?= $infoBarang  ?></h1>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-4">
-                <div class="text-bg-dark rounded text-center">
-                  <p>Jumlah Supplier</p>
-                  <h1><?= $infoSupplier  ?></h1>
+              <div class="col-lg-4 py-3">
+                <div class="text-bg-dark py-3 rounded text-center d-flex align-items-center justify-content-center">
+                  <i class='bx bxs-bank bx-lg bg-danger rounded-circle p-2'></i>
+                  <div class="form-group px-4">
+                    <p>Jumlah Supplier</p>
+                    <h1><?= $infoSupplier  ?></h1>
+                  </div>
                 </div>
               </div>
             </div>
