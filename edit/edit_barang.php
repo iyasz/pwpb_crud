@@ -6,6 +6,8 @@ include "../koneksi.php";
 $id = $_GET['id'];
 $sups = $conn->query("SELECT * FROM supplier");
 $datas = $conn->query("SELECT * FROM barang WHERE id = '$id'")->fetch_assoc();
+$rak = $conn->query("SELECT * FROM rak");
+
 
 if (isset($_POST['submit'])) {
     $kode = htmlspecialchars($_POST['kode']);
@@ -15,7 +17,8 @@ if (isset($_POST['submit'])) {
     $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
     $jenis = htmlspecialchars($_POST['jenis']);
     $suppl = htmlspecialchars($_POST['suppl']);
-
+    $supp = htmlspecialchars($_POST['suppl']);
+    $rak = htmlspecialchars($_POST['rak']);
 
 
     if ($jenis == "") {
@@ -143,6 +146,14 @@ if (isset($_POST['submit'])) {
                                         <option <?php if ($datas['jenis_barang'] == "minuman") {
                                                     echo "selected";
                                                 } ?> value="minuman">Minuman</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="">Rak</label>
+                                    <select name="rak" class=" form-select aa" id="">
+                                        <?php foreach ($rak as $raks) { ?>
+                                            <option value="<?= $raks['id'] ?>" <?= $raks['id'] == $datas['supplier_id'] ? 'selected' : '' ?>><?= $raks['kode_rak']  ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="form-group mt-3">

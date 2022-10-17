@@ -28,6 +28,16 @@ $olds = [];
 //   }
 // }
 
+$admin = $conn->query("SELECT * FROM admin");
+$infoAdmin = mysqli_num_rows($admin);
+
+$barang = $conn->query("SELECT * FROM barang");
+$infoBarang = mysqli_num_rows($barang);
+
+$supplier = $conn->query("SELECT * FROM supplier");
+$infoSupplier = mysqli_num_rows($supplier);
+
+
 
 
 
@@ -85,7 +95,7 @@ $olds = [];
           <a class="nav-link" href="supplier/">Supplier</a>
           <a class="nav-link" href="transaksi/">Transaksi</a>
           <a class="nav-link" href="admin/">Admin</a>
-          <a class="nav-link " href="../rak/">Rak</a>
+          <a class="nav-link " href="rak/">Rak</a>
 
         </div>
       </div>
@@ -94,6 +104,40 @@ $olds = [];
   <!-- end header  -->
 
   <!-- content  -->
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="card shadow">
+          <div class="card-body">
+            <div class="row  ">
+              <div class="col-lg-4">
+                <div class="text-bg-dark rounded text-center">
+                  <p>Jumlah Admin</p>
+                  <h1><?= $infoAdmin ?></h1>
+                </div>
+              </div>
+              <div class="col-lg-4 ">
+                <div class="text-bg-dark rounded text-center">
+                  <p>Jumlah Barang</p>
+                  <h1><?= $infoBarang  ?></h1>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="text-bg-dark rounded text-center">
+                  <p>Jumlah Supplier</p>
+                  <h1><?= $infoSupplier  ?></h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
   <!-- <form action="" method="post">
 
     <div class="modal fade" id="loginPage">
