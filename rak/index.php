@@ -55,7 +55,7 @@ if (isset($_POST['delete'])) {
     <link rel="stylesheet" href="../app/style.css">
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Supplier - Yasz Storage Supplier</title>
+    <title>Rak - Yasz Storage Supplier</title>
 </head>
 <style>
     .aa:focus {
@@ -116,7 +116,7 @@ if (isset($_POST['delete'])) {
     </div>
     <div class="container mt-3 supp">
         <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card shadow-lg mb-3">
                     <div class="card-header bg-dark mb-3">
                         <h3 class="mb-0 text-white ps-5">Tambah Data Rak</h3>
@@ -124,37 +124,29 @@ if (isset($_POST['delete'])) {
                     <div class="card-body">
                         <form action="" method="post">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Nama <i class='bx bx-user'></i></label>
-                                        <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label for="">Kontak <i class='bx bx-user-pin'></i></label>
-                                        <input type="text" autocomplete="off" name="kontak" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label for="">No. Telepon <i class='bx bx-phone'></i></label>
-                                        <input type="number" name="telp" required autocomplete="off" id="kontak" placeholder="Nomor Telepon" class="form-control mb-3 aa">
-                                    </div>
+                                <div class="form-group">
+                                    <label for="">Ruang <i class='bx bx-user'></i></label>
+                                    <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group ">
-                                        <label for="">Alamat <i class='bx bx-home-alt-2'></i></label>
-                                        <input type="text" required name="alamat" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label for="">Email <i class='bx bx-envelope'></i></label>
-                                        <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
-                                    </div>
-                                    <p class="text-primary pp"><?php if (isset($alert)) {
-                                                                    echo $alert;
-                                                                } ?></p>
-                                    <div class="form-group text-end mt-4">
-                                        <button class="btn btn-primary mt-4 btn-st" type="submit" name="submit">Submit</button>
+                                <div class="form-group mt-3">
+                                    <label for="">Baris Kode <i class='bx bx-user-pin'></i></label>
+                                    <input type="text" autocomplete="off" name="kontak" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="">Rak Kode <i class='bx bx-home-alt-2'></i></label>
+                                    <input type="text" required name="alamat" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label for="">Transaksi Id <i class='bx bx-envelope'></i></label>
+                                    <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
+                                </div>
+                                <p class="text-primary pp"><?php if (isset($alert)) {
+                                                                echo $alert;
+                                                            } ?></p>
+                                <div class="form-group text-end mt-4">
+                                    <button class="btn btn-primary mt-4 btn-st" type="submit" name="submit">Submit</button>
 
-                                        <button class="btn btn-danger mt-4" type="reset" name="btn-reset">Reset</button>
-                                    </div>
+                                    <button class="btn btn-danger mt-4" type="reset" name="btn-reset">Reset</button>
                                 </div>
                             </div>
                         </form>
