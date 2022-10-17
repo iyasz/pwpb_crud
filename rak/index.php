@@ -3,6 +3,8 @@
 include "../koneksi.php";
 
 $suppliers = $conn->query("SELECT * FROM supplier");
+$transaksi = $conn->query("SELECT * FROM transaksi");
+$rak = $conn->query("SELECT * FROM rak");
 
 if (isset($_POST['submit'])) {
     $nama = htmlspecialchars($_POST['nama']);
@@ -124,21 +126,51 @@ if (isset($_POST['delete'])) {
                     <div class="card-body">
                         <form action="" method="post">
                             <div class="row">
-                                <div class="form-group">
-                                    <label for="">Ruang <i class='bx bx-user'></i></label>
-                                    <input autocomplete="off" type="text" name="nama" placeholder="Nama Supplier" class="form-control mb-3 aa" required>
+                                <div class="form-group mb-3">
+                                    <label for="">Ruang Rak <i class='bx bx-user'></i></label>
+                                    <select name="namabarang" required class=" form-select aa" id="">
+                                        <option value="" selected></option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                    </select>
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label for="">Baris Kode <i class='bx bx-user-pin'></i></label>
-                                    <input type="text" autocomplete="off" name="kontak" id="kontak" placeholder="Nama Kontak" required class="form-control mb-3 aa">
+                                <div class="form-group mb-3">
+                                    <label for="">Baris Ruang <i class='bx bx-user'></i></label>
+                                    <select name="namabarang" required class=" form-select aa" id="">
+                                        <option value="" selected></option>
+                                        <option value="R-1">R-1</option>
+                                        <option value="R-2">R-2</option>
+                                        <option value="R-3">R-3</option>
+                                        <option value="R-4">R-4</option>
+                                        <option value="R-5">R-5</option>
+                                        <option value="R-6">R-6</option>
+                                        <option value="R-7">R-7</option>
+                                        <option value="R-8">R-8</option>
+                                        <option value="R-9">R-9</option>
+                                        <option value="R-10">R-10</option>
+                                        <option value="R-11">R-11</option>
+                                        <option value="R-12">R-12</option>
+                                        <option value="R-13">R-13</option>
+                                        <option value="R-14">R-14</option>
+                                        <option value="R-15">R-15</option>
+                                    </select>
                                 </div>
-                                <div class="form-group ">
+                                <div class="form-group mb-3 ">
                                     <label for="">Rak Kode <i class='bx bx-home-alt-2'></i></label>
-                                    <input type="text" required name="alamat" id="kontak" placeholder="Masukan Alamat" autocomplete="off" class="form-control mb-3 aa">
+                                    <input type="text" required name="alamat" id="kontak" placeholder="Masukan Rak Kode" autocomplete="off" class="form-control mb-3 aa">
                                 </div>
-                                <div class="form-group mt-3">
-                                    <label for="">Transaksi Id <i class='bx bx-envelope'></i></label>
-                                    <input type="text" required name="email" id="kontak" placeholder="Masukan Email" autocomplete="off" class="form-control aa">
+                                <div class="form-group mb-3">
+                                    <label for="">Transaksi Id <i class='bx bx-user'></i></label>
+                                    <select name="trid" required class=" form-select aa" id="">
+                                        <option value="" selected></option>
+                                        <?php foreach ($transaksi as $trans) { ?>
+                                            <option value="<?= $trans['id'] ?>"><?= $trans['nama'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                                 <p class="text-primary pp"><?php if (isset($alert)) {
                                                                 echo $alert;
@@ -168,24 +200,22 @@ if (isset($_POST['delete'])) {
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nama</th>
-                                    <th>Kontak</th>
-                                    <th>No .Telp</th>
-                                    <th>Alamat</th>
-                                    <th>Email</th>
+                                    <th>Ruang Rak</th>
+                                    <th>Baris Ruang</th>
+                                    <th>Rak Kode</th>
+                                    <th>Transaksi Id</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1;
-                                foreach ($suppliers as $supplier) { ?>
+                                foreach ($transaksi as $trans) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $supplier['nama'] ?></td>
                                         <td><?= $supplier['kontak'] ?></td>
                                         <td><?= $supplier['telp'] ?></td>
                                         <td><?= $supplier['alamat'] ?></td>
-                                        <td><?= $supplier['email'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
                                             <a href="../edit/edit_supp.php?id=<?= $supplier['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
