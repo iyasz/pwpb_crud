@@ -87,7 +87,6 @@ if (isset($_POST['submit'])) {
                     <a class="nav-link " href="">Supplier</a>
                     <a class="nav-link " href="../transaksi/">Transaksi</a>
                     <a class="nav-link " href="../admin/">Admin</a>
-                    <a class="nav-link " href="../rak/">Rak</a>
                 </div>
             </div>
         </div>

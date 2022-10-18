@@ -125,7 +125,6 @@ if (isset($_POST['hitung'])) {
                     <a class="nav-link" href="../supplier/">Supplier</a>
                     <a class="nav-link active" href="">Transaksi</a>
                     <a class="nav-link " href="../admin/">Admin</a>
-                    <a class="nav-link " href="../rak/">Rak</a>
                 </div>
             </div>
         </div>
