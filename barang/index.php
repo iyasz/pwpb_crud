@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     echo "<script>alert('Masukan Jenis Barang')</script>";
     echo '<script>location.replace("index.php"); </script>';
   } else {
-    $simpan = $conn->query("INSERT INTO barang (kode, nama,stok,harga,kadaluwarsa,jenis_barang,rak_id,supplier_id) VALUES ('$kode','$nama','$stok','$harga','$kadaluwarsa','$jenis','$rak','$supp')");
+    $simpan = $conn->query("INSERT INTO barang (kode, nama,stok,harga,kadaluwarsa,jenis_barang,supplier_id) VALUES ('$kode','$nama','$stok','$harga','$kadaluwarsa','$jenis','$supp')");
     $alert = "Data Berhasil Disimpan";
     echo '<script>location.replace("index.php"); </script>';
   }
@@ -155,15 +155,6 @@ if (isset($_POST['delete'])) {
                   </select>
                 </div>
                 <div class="form-group mt-3">
-                  <label for="">Rak</label>
-                  <select name="rak" required class=" form-select aa" id="">
-                    <option selected></option>
-                    <?php foreach ($rak as $raks) { ?>
-                      <option value="<?= $raks['id'] ?>"><?= $raks['kode_rak'] ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-                <div class="form-group mt-3">
                   <label for="">Supplier</label>
                   <select name="suppl" required class=" form-select aa" id="">
                     <option selected></option>
@@ -205,7 +196,7 @@ if (isset($_POST['delete'])) {
                   <th>Stok</th>
                   <th>Harga</th>
                   <th>Kadaluwarsa</th>
-                  <th>Rak </th>
+                  <th>Jenis Barang</th>
                   <th>Supplier</th>
                   <th class="text-center">Aksi</th>
                 </tr>
@@ -220,8 +211,6 @@ if (isset($_POST['delete'])) {
                     <td><?= $supplier['stok'] ?></td>
                     <td><?= $supplier['harga'] ?></td>
                     <td><?= $supplier['kadaluwarsa'] ?></td>
-                    <?php $rakNama = $conn->query("SELECT * FROM rak WHERE id = '$supplier[rak_id]'")->fetch_assoc(); ?>
-                    <td><?= $rakNama['kode_rak'] ?></td>
                     <td><?= $supplier['jenis_barang'] ?></td>
                     <?php
                     $supps = $conn->query("SELECT nama FROM supplier where id = '$supplier[supplier_id]' ")->fetch_assoc();

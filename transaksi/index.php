@@ -5,6 +5,7 @@ $barang = $conn->query("SELECT * FROM barang");
 $admin = $conn->query("SELECT * FROM admin");
 $transaksi = $conn->query("SELECT * FROM transaksi");
 $transaksif = $conn->query("SELECT status FROM transaksi");
+$rak = $conn->query("SELECT * FROM rak");
 
 if (isset($_POST['submit'])) {
     $adminS = htmlspecialchars($_POST['adm']);
@@ -12,13 +13,19 @@ if (isset($_POST['submit'])) {
     $tgltr = htmlspecialchars($_POST['tgltr']);
     $jumlah = htmlspecialchars($_POST['jumlah']);
     $total = htmlspecialchars($_POST['total']);
+    $ruang = htmlspecialchars($_POST['ruang']);
+    $baris = htmlspecialchars($_POST['baris']);
+    $rak = htmlspecialchars($_POST['rak']);
     $status = htmlspecialchars($_POST['status']);
     $tipe = htmlspecialchars($_POST['tipe']);
 
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
     if ($tipe == "Masuk") {
         $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
-        $simpan = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,total_harga,status,tipe) VALUES ('$adminS','$namabarang','$tgltr','$jumlah','$total','$status','$tipe')");
+
+        $simpanTransaksi = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,total_harga,status,tipe) VALUES ('$adminS','$namabarang','$tgltr','$jumlah','$total','$status','$tipe')");
+        $simpanRak = $conn->query("INSERT INTO rak(ruang_rak, baris_ruang, rak_kode, id_barang) VALUES ('$ruang','$baris','$rak', '$namabarang')");
+
 
         $masukBrgStok = $selectBrg['stok'] + $jumlah;
         $masukBrgHarga = $selectBrg['harga'] + $total;
@@ -40,6 +47,7 @@ if (isset($_POST['submit'])) {
 if (isset($_POST['delete'])) {
     $id = htmlspecialchars($_POST['id']);
     $delete = mysqli_query($conn, "DELETE FROM transaksi where id = '$id'");
+    $deletes = mysqli_query($conn, "DELETE FROM rak where id = '$id'");
 
     echo '<script>location.replace("index.php"); </script>';
 }
@@ -128,9 +136,9 @@ if (isset($_POST['hitung'])) {
     <div class="mt-5">
         <h1 class=" text-center mt-5 supp animate__animated animate__fadeInRight">Form Transaksi</h1>
     </div>
-    <div class="container mt-3 supp">
+    <div class="container-fluid mt-3 supp">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="card shadow-lg mb-3 animate__animated animate__fadeInRight">
                     <div class="card-header bg-dark mb-3 ">
                         <h3 class="mb-0 text-white ps-5 animate__animated animate__fadeInRight">Tambah Data Transaksi</h3>
@@ -259,6 +267,7 @@ if (isset($_POST['hitung'])) {
                                     <th>Tanggal Transaksi</th>
                                     <th>Jumlah</th>
                                     <th>Total Harga</th>
+                                    <th>Kode Barang</th>
                                     <th>Status</th>
                                     <th>Tipe</th>
                                     <th class="text-center">Aksi</th>
@@ -274,11 +283,14 @@ if (isset($_POST['hitung'])) {
                                         <td><?= $transak['tgl_transaksi'] ?></td>
                                         <td><?= $transak['jumlah'] ?></td>
                                         <td><?= $transak['total_harga'] ?></td>
+                                        <?php $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$transak[barang_id]'")->fetch_assoc() ?>
+                                        <td><?= $selectBrg['nama'] ?></td>
                                         <td><?= $transak['status'] ?></td>
                                         <td><?= $transak['tipe'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
                                             <a href="../edit/edit_admin.php?id=<?= $transak['id'] ?> " class="btn btn-primary btn-sm">Edit</a>
                                             <form action="" method="post">
+                                                <?php $selectRak = $conn->query("SELECT * FROM rak ") ?>
                                                 <input type="hidden" name="id" value="<?= $transak['id'] ?>">
                                                 <button type="submit" name="delete" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
@@ -297,21 +309,21 @@ if (isset($_POST['hitung'])) {
 
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <?php
-    $namabarang = htmlspecialchars($_POST['namabarang']);
-    $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
+    // $namabarang = htmlspecialchars($_POST['namabarang']);
+    // $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
 
     ?>
     <script>
-        const jumlah = document.getElementById("jml").value;
-        const total = document.getElementById("total");
-        const harga = <?= $selectBrg['harga'] ?>;
+        // const jumlah = document.getElementById("jml").value;
+        // const total = document.getElementById("total");
+        // const harga = <?= $selectBrg['harga'] ?>;
 
-        // jumlah.addEventListener("keyup", () => {
-        //   jumlah * jumlah = total;
-        // });
-        function totalharga() {
-            total.value = jumlah * harga;
-        }
+        // // jumlah.addEventListener("keyup", () => {
+        // //   jumlah * jumlah = total;
+        // // });
+        // function totalharga() {
+        //     total.value = jumlah * harga;
+        // }
     </script>
 </body>
 
