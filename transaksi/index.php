@@ -173,6 +173,43 @@ if (isset($_POST['hitung'])) {
                                 </div>
                                 <a class="btn btn-primary mb-3" onclick="totalharga()">Hitung</a>
                                 <div class="form-group mb-3">
+                                    <label for="">Ruang Rak <i class='bx bx-user'></i></label>
+                                    <select name="ruang" required class=" form-select aa" id="">
+                                        <option value="" selected></option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                        <option value="F">F</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="">Baris Ruang <i class='bx bx-user'></i></label>
+                                    <select name="baris" required class=" form-select aa" id="">
+                                        <option value="" selected></option>
+                                        <option value="R-1">R-1</option>
+                                        <option value="R-2">R-2</option>
+                                        <option value="R-3">R-3</option>
+                                        <option value="R-4">R-4</option>
+                                        <option value="R-5">R-5</option>
+                                        <option value="R-6">R-6</option>
+                                        <option value="R-7">R-7</option>
+                                        <option value="R-8">R-8</option>
+                                        <option value="R-9">R-9</option>
+                                        <option value="R-10">R-10</option>
+                                        <option value="R-11">R-11</option>
+                                        <option value="R-12">R-12</option>
+                                        <option value="R-13">R-13</option>
+                                        <option value="R-14">R-14</option>
+                                        <option value="R-15">R-15</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3 ">
+                                    <label for="">Rak Kode <i class='bx bx-home-alt-2'></i></label>
+                                    <input type="text" required name="rak" id="kontak" placeholder="Masukan Rak Kode" autocomplete="off" class="form-control mb-3 aa">
+                                </div>
+                                <div class="form-group mb-3">
                                     <label for="">Status <i class='bx bx-envelope'></i></label>
                                     <select name="status" required class="form-select aa" aria-label="Default select example">
                                         <option selected></option>
