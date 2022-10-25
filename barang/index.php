@@ -9,12 +9,11 @@ $rak = $conn->query("SELECT * FROM rak");
 if (isset($_POST['submit'])) {
   $kode = htmlspecialchars($_POST['kode']);
   $nama = htmlspecialchars($_POST['nama']);
-  $stok = htmlspecialchars($_POST['stok']);
   $harga = htmlspecialchars($_POST['harga']);
   $kadaluwarsa = htmlspecialchars($_POST['kadaluwarsa']);
   $jenis = htmlspecialchars($_POST['jenis']);
-  $rak = htmlspecialchars($_POST['rak']);
   $supp = htmlspecialchars($_POST['suppl']);
+  $rak_id = htmlspecialchars($_POST['rak_id']);
 
   // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
   if ($jenis == "") {
@@ -134,10 +133,6 @@ if (isset($_POST['delete'])) {
                   <input autocomplete="off" type="text" name="nama" placeholder="Nama Barang" class="form-control mb-3 aa" required>
                 </div>
                 <div class="form-group mt-3">
-                  <label for="">Stok <i class='bx bx-user-pin'></i></label>
-                  <input type="number" autocomplete="off" name="stok" placeholder="Stok Barang" required class="form-control mb-3 aa">
-                </div>
-                <div class="form-group mt-3">
                   <label for="">Harga <i class='bx bx-phone'></i></label>
                   <input type="number" name="harga" required autocomplete="off" placeholder="Harga Barang" class="form-control mb-3 aa">
                 </div>
@@ -159,6 +154,15 @@ if (isset($_POST['delete'])) {
                     <option selected></option>
                     <?php foreach ($sups as $sup) { ?>
                       <option value="<?= $sup['id'] ?>"><?= $sup['nama'] ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <div class="form-group mt-3">
+                  <label for="">Rak</label>
+                  <select name="rak_id" required class=" form-select aa" id="">
+                    <option selected></option>
+                    <?php foreach ($rak as $raks) { ?>
+                      <option value="<?= $raks['id'] ?>"><?= $raks['rak_kode'] ?></option>
                     <?php } ?>
                   </select>
                 </div>

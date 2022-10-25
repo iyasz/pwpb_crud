@@ -210,6 +210,7 @@ if (isset($_POST['delete'])) {
     </div>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <?php
+
     if (isset($swal)) {
         echo "<script>
         Swal.fire({
