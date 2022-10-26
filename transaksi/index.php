@@ -8,29 +8,35 @@ $transaksif = $conn->query("SELECT status FROM transaksi");
 $rak = $conn->query("SELECT * FROM rak");
 
 if (isset($_POST['submit'])) {
-    $adminS = htmlspecialchars($_POST['adm']);
+    $admin = htmlspecialchars($_POST['admin']);
     $namabarang = htmlspecialchars($_POST['namabarang']);
     $tgltr = htmlspecialchars($_POST['tgltr']);
     $jumlah = htmlspecialchars($_POST['jumlah']);
-    $total = htmlspecialchars($_POST['total']);
-    $ruang = htmlspecialchars($_POST['ruang']);
-    $baris = htmlspecialchars($_POST['baris']);
-    $rak = htmlspecialchars($_POST['rak']);
     $status = htmlspecialchars($_POST['status']);
     $tipe = htmlspecialchars($_POST['tipe']);
 
     // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
-    if ($tipe == "Masuk") {
+    if ($tipe == "masuk") {
         $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
 
-        $simpanTransaksi = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,total_harga,status,tipe) VALUES ('$adminS','$namabarang','$tgltr','$jumlah','$total','$status','$tipe')");
-        $simpanRak = $conn->query("INSERT INTO rak(ruang_rak, baris_ruang, rak_kode, id_barang) VALUES ('$ruang','$baris','$rak', '$namabarang')");
+        $simpanTransaksi = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,status,tipe) VALUES ('$admin','$namabarang','$tgltr','$jumlah','$status','$tipe')");
 
 
-        $masukBrgStok = $selectBrg['stok'] + $jumlah;
-        $masukBrgHarga = $selectBrg['harga'] + $total;
-        $updateBrg = $conn->query("UPDATE barang SET stok = '$masukBrgStok', harga = '$masukBrgHarga' WHERE id = '$selectBrg[id]'");
-        echo '<script>alert("Data Transaksi Disimpan"); location.replace("index.php"); </script>';
+        $masukBrgStok = $selectBrg['stok_masuk'] + $jumlah;
+        $updateBrg = $conn->query("UPDATE barang SET stok_masuk = '$masukBrgStok' WHERE id = '$selectBrg[id]'");
+        echo '<script>alert("Data Transaksi Disimpan"); 
+                        location.replace("index.php"); </script>';
+    } elseif ($tipe == "keluar") {
+        $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
+
+        $simpanTransaksi = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,status,tipe) VALUES ('$admin','$namabarang','$tgltr','$jumlah','$status','$tipe')");
+
+
+        $kurangBrgStok = $selectBrg['stok_masuk'] - $jumlah;
+        $keluarBrgStok = $selectBrg['stok_keluar'] + $jumlah;
+        $updateBrg = $conn->query("UPDATE barang SET stok_masuk = '$kurangBrgStok', stok_keluar = '$keluarBrgStok' WHERE id = '$selectBrg[id]'");
+        echo '<script>alert("Data Transaksi Disimpan"); 
+                        location.replace("index.php"); </script>';
     }
 
     // header('location: index.php');
@@ -47,19 +53,18 @@ if (isset($_POST['submit'])) {
 if (isset($_POST['delete'])) {
     $id = htmlspecialchars($_POST['id']);
     $delete = mysqli_query($conn, "DELETE FROM transaksi where id = '$id'");
-    $deletes = mysqli_query($conn, "DELETE FROM rak where id = '$id'");
 
     echo '<script>location.replace("index.php"); </script>';
 }
 
-if (isset($_POST['hitung'])) {
-    $namabarang = htmlspecialchars($_POST['namabarang']);
-    $jumlah = htmlspecialchars($_POST['jumlah']);
-    $total = htmlspecialchars($_POST['total']);
-    $hargaBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
+// if (isset($_POST['hitung'])) {
+//     $namabarang = htmlspecialchars($_POST['namabarang']);
+//     $jumlah = htmlspecialchars($_POST['jumlah']);
+//     $total = htmlspecialchars($_POST['total']);
+//     $hargaBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
 
-    $aritmatika = $jumlah * $hargaBrg['harga'];
-}
+//     $aritmatika = $jumlah * $hargaBrg['harga'];
+// }
 
 ?>
 
@@ -147,7 +152,7 @@ if (isset($_POST['hitung'])) {
                             <div class="row">
                                 <div class="form-group mb-3">
                                     <label for="">Admin <i class='bx bx-user'></i></label>
-                                    <select name="adm" required class=" form-select aa" id="">
+                                    <select name="admin" required class=" form-select aa" id="">
                                         <option value="" selected></option>
                                         <?php foreach ($admin as $adm) { ?>
                                             <option value="<?= $adm['id'] ?>"><?= $adm['nama'] ?></option>
@@ -230,11 +235,15 @@ if (isset($_POST['hitung'])) {
                                 foreach ($transaksi as $transak) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $transak['id_admin'] ?></td>
-                                        <td><?= $transak['barang_id'] ?></td>
+                                        <?php $selectNamaAdm = $conn->query("SELECT * FROM admin WHERE id = $transak[id_admin]")->fetch_assoc();
+
+                                        $selectNamaBrg = $conn->query("SELECT * FROM barang WHERE id = $transak[barang_id]")->fetch_assoc(); ?>
+
+                                        <td><?= $selectNamaAdm['nama'] ?></td>
+                                        <td><?= $selectNamaBrg['nama'] ?></td>
                                         <td><?= $transak['tgl_transaksi'] ?></td>
                                         <?php $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$transak[barang_id]'")->fetch_assoc() ?>
-                                        <td><?= $selectBrg['nama'] ?></td>
+                                        <td><?= $transak['jumlah'] ?></td>
                                         <td><?= $transak['status'] ?></td>
                                         <td><?= $transak['tipe'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">

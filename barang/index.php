@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
   // $simpan = $conn->query("INSERT INTO supplier values (NULL, '$nama','$kontak','$telp','$alamat','$email')");
   $simpan = $conn->query("INSERT INTO barang (kode, nama,harga,kadaluwarsa,jenis_barang,supplier_id,rak_id) VALUES ('$kode','$nama','$harga','$kadaluwarsa','$jenis','$supp','$rak_id')");
 
-  // header('location: index.php');
+  header('location: index.php');
 
   // if (empty($nama) or empty($kontak) or empty($telp) or empty($alamat) or empty($email)) {
   //     $alert = "Masukan Data dengan lengkap";
