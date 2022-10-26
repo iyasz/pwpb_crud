@@ -29,7 +29,9 @@ if (isset($_POST['submit'])) {
     } elseif ($tipe == "keluar") {
         $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$namabarang'")->fetch_assoc();
 
-        $simpanTransaksi = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,status,tipe) VALUES ('$admin','$namabarang','$tgltr','$jumlah','$status','$tipe')");
+        $totalHarga = $selectBrg['harga'] * $jumlah;
+
+        $simpanTransaksi = $conn->query("INSERT INTO transaksi (id_admin, barang_id,tgl_transaksi,jumlah,total_harga,status,tipe) VALUES ('$admin','$namabarang','$tgltr','$jumlah','$totalHarga','$status','$tipe')");
 
 
         $kurangBrgStok = $selectBrg['stok_masuk'] - $jumlah;
@@ -225,6 +227,7 @@ if (isset($_POST['delete'])) {
                                     <th>Barang</th>
                                     <th>Tanggal Transaksi</th>
                                     <th>Jumlah</th>
+                                    <th>Totaal Harga</th>
                                     <th>Status</th>
                                     <th>Tipe</th>
                                     <th class="text-center">Aksi</th>
@@ -244,6 +247,7 @@ if (isset($_POST['delete'])) {
                                         <td><?= $transak['tgl_transaksi'] ?></td>
                                         <?php $selectBrg = $conn->query("SELECT * FROM barang WHERE id = '$transak[barang_id]'")->fetch_assoc() ?>
                                         <td><?= $transak['jumlah'] ?></td>
+                                        <td><?= $transak['total_harga'] ?></td>
                                         <td><?= $transak['status'] ?></td>
                                         <td><?= $transak['tipe'] ?></td>
                                         <td class="justify-content-center d-flex gap-1">
